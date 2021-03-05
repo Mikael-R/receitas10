@@ -96,7 +96,7 @@ type Body =
 type Return = Recipe[]
 ```
 
-* ~~Erros:~~
+* ~~Errors:~~
 
 
 ### Informações de usuário
@@ -116,7 +116,7 @@ type Return = {
 };
 ```
 
-* Erros:
+* Errors:
   * User not found
 
 ### Receitas curtidas
@@ -128,7 +128,7 @@ type Return = {
 type Return = Recipe[]
 ```
 
-* Erros:
+* Errors:
   * User not found
 
 ### Comentários em receitas
@@ -140,7 +140,7 @@ type Return = Recipe[]
 type Return = { recipeURL: string, comment: string, data: Date }[]
 ```
 
-* Erros:
+* Errors:
   * User not found
 
 ### Receitas de usuário
@@ -152,7 +152,7 @@ type Return = { recipeURL: string, comment: string, data: Date }[]
 type Return = Recipe[]
 ```
 
-* Erros:
+* Errors:
   * User not found
 
 ### Receita especifica de usuário
@@ -164,7 +164,7 @@ type Return = Recipe[]
 type Return = Recipe
 ```
 
-* Erros:
+* Errors:
   * User not found
   * Recipe not found
 
@@ -208,6 +208,26 @@ interface Body {
 interface Return {
   token: string
 }
+```
+
+* Errors:
+  * User not found
+
+### Trocar senha
+
+* URL: https://domain/changePassword/:username
+
+* Body:
+```typescript
+interface Body {
+  email: string
+  password: string
+}
+```
+
+* Retorno:
+```typescript
+interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
 * Errors:
@@ -260,7 +280,7 @@ interface Body {
 interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
-* Erros:
+* Errors:
   * User not found
   * Name already used
   * Need information
@@ -276,7 +296,7 @@ interface Return { message: string, errors: { attribute: string, message: string
 interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
-* Erros:
+* Errors:
   * User not found
   * Recipe not found
 
