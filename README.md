@@ -170,6 +170,49 @@ type Return = Recipe
 
 ## POST
 
+### Cadastrar user
+
+* URL: https://domain/users
+
+* Body:
+```typescript
+interface Body {
+  name: string
+  email: string
+  password: string
+}
+```
+
+* Return:
+```typescript
+interface Return { userId: string}
+```
+
+* Error:
+  * Email already used
+
+### Logar user(pegar token)
+
+* URL: https://domain/sessions
+
+* Body:
+```typescript
+interface Body {
+  email: string
+  password: string
+}
+```
+
+* Return:
+```typescript
+interface Return {
+  token: string
+}
+```
+
+* Errors:
+  * User not found
+
 ### Adicionar receita
 
 * URL: https://domain/recipe/:username/:nome-da-receita
