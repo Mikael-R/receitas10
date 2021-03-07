@@ -223,6 +223,8 @@ type Return = Recipe
     token: String,
     avatarUrl: String,
     description: String,
+    createdAt: String,
+    updatedAt: String
   },
     }
 ```
