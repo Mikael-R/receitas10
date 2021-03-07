@@ -9,6 +9,7 @@
   "scripts": {
     "compile": "tsc",
     "migrations": "knex migrate:latest",
+    "rollback-migrations": "knex migrate:rollback --all",
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts"
   },
   "dependencies": {
