@@ -1,27 +1,29 @@
 <template>
   <div id="app">
-  <router-view/>
+    <div class="container">
+      <router-view/>
+    </div>
+  <Footer/>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
+import Footer from './components/Footer'
 
 export default {
   name: 'App',
-  // components: {
-  //   HelloWorld
-  // }
+  components: {
+    Footer
+  }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
 div{
   background-color: #FCF5E0;
-  width: 100vw;
-  height: 100vh;
+  
 }
 </style>
