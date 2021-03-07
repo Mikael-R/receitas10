@@ -6,13 +6,15 @@ import authMiddleware from './middlewares/auth'
 
 const routes = Router()
 
-routes.get('/hello-no-auth', (_req, res) => res.json({ message: 'hello no auth' }))
+routes.get('/hello-no-auth', (_, res) => res.json({ message: 'hello no auth' }))
 
 routes.post('/users', UserController.store)
 routes.post('/sessions', SessionController.store)
 
 routes.use(authMiddleware)
 
-routes.get('/hello-with-auth', (req: Request, res) => res.json({ message: req.userId }))
+routes.get('/hello-with-auth', (req: Request, res) =>
+  res.json({ message: req.userId })
+)
 
 export default routes
