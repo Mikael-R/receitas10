@@ -1,6 +1,6 @@
 # receita10-api
 
-```typescript
+```json
 type Comment = { username: string; content: string, postedAt: Date }
 
 interface Recipe {
@@ -53,7 +53,7 @@ interface UserRecipe extends Recipe {
 * URL: https://domain/searchRecipe
 
 * Body:
-```typescript
+```json
 type Body =
   | { random: boolean }
   | {
@@ -92,7 +92,7 @@ type Body =
 ```
 
 * Retorno:
-```typescript
+```json
 type Return = Recipe[]
 ```
 
@@ -104,7 +104,7 @@ type Return = Recipe[]
 * URL: https://domain/user/:username
 
 * Retorno:
-```typescript
+```json
 type Return = {
   name: string;
   username: string;
@@ -124,7 +124,7 @@ type Return = {
 * URL: https://domain/recipesLiked/:username
 
 * Retorno:
-```typescript
+```json
 type Return = Recipe[]
 ```
 
@@ -136,7 +136,7 @@ type Return = Recipe[]
 * URL: https://domain/comments/:username
 
 * Retorno:
-```typescript
+```json
 type Return = { recipeURL: string, comment: string, data: Date }[]
 ```
 
@@ -148,7 +148,7 @@ type Return = { recipeURL: string, comment: string, data: Date }[]
 * URL: https://domain/recipes/:username
 
 * Retorno:
-```typescript
+```json
 type Return = Recipe[]
 ```
 
@@ -160,7 +160,7 @@ type Return = Recipe[]
 * URL: https://domain/:username/:recipeName
 
 * Retorno:
-```typescript
+```json
 type Return = Recipe
 ```
 
@@ -170,55 +170,74 @@ type Return = Recipe
 
 ## POST
 
-### Cadastrar user
+### Sign-up user
 
 * URL: https://domain/users
 
 * Body:
-```typescript
-interface Body {
-  name: string
-  email: string
-  password: string
+```
+{
+  name: String
+  username: String
+  email: String
+  password: String
 }
 ```
 
 * Return:
-```typescript
-interface Return { userId: string}
 ```
-
-* Error:
-  * Email already used
-
-### Logar user(pegar token)
-
-* URL: https://domain/sessions
-
-* Body:
-```typescript
-interface Body {
-  email: string
-  password: string
-}
-```
-
-* Return:
-```typescript
-interface Return {
-  token: string
+{
+  error: false
+  message: 'Usuário criado com sucesso',
+  userId: String,
 }
 ```
 
 * Errors:
-  * User not found
+  * Parâmetros faltando
+  * Username não pode ser menor que 2 ou maior que 12 caracteres
+  * Este username já existe
+  * Este email já existe'
+
+### Sign-in user
+
+* URL: https://domain/sessions
+
+* Body:
+```
+{
+  email: String
+  password: String
+}
+```
+
+* Return:
+```
+{
+  error: false,
+  message: 'Usuário encontrado',
+  user: {
+    id: String,
+    name: String,
+    username: String,
+    token: String,
+    avatarUrl: String,
+    description: String,
+  },
+    }
+```
+
+* Errors:
+  * Parâmetros faltando
+  * Usuário não encontrado
+  * Senha incorreta
 
 ### Trocar senha
 
 * URL: https://domain/changePassword/:username
 
 * Body:
-```typescript
+```json
 interface Body {
   email: string
   password: string
@@ -226,7 +245,7 @@ interface Body {
 ```
 
 * Retorno:
-```typescript
+```json
 interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
@@ -238,7 +257,7 @@ interface Return { message: string, errors: { attribute: string, message: string
 * URL: https://domain/recipe/:username/:nome-da-receita
 
 * Body:
-```typescript
+```json
 interface Body {
   preparationTime:
     | "rápido"
@@ -276,7 +295,7 @@ interface Body {
 ```
 
 * Retorno:
-```typescript
+```json
 interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
@@ -292,7 +311,7 @@ interface Return { message: string, errors: { attribute: string, message: string
 * URL: https://domain/recipe/:username/:nome-da-receita
 
 * Retorno:
-```typescript
+```json
 interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
@@ -307,7 +326,7 @@ interface Return { message: string, errors: { attribute: string, message: string
 * URL: https://domain/recipe/:username/:nome-da-receita
 
 * Body:
-```typescript
+```json
 interface Body {
   preparationTime:
     | "rápido"
@@ -345,7 +364,7 @@ interface Body {
 ```
 
 * Retorno:
-```typescript
+```json
 interface Return { message: string, errors: { attribute: string, message: string }[] }
 ```
 
