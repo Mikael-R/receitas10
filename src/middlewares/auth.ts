@@ -17,12 +17,14 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     if (!user)
       return res
         .status(401)
-        .json({ error: true, message: 'Token não pertence a nenhum usuário' })
+        .json({ error: true, message: 'Token inválido ou expirado' })
 
     req.userId = userId
 
     return next()
   } catch (error) {
-    return res.status(401).json({ error: true, message: 'Token inválido' })
+    return res
+      .status(401)
+      .json({ error: true, message: 'Token inválido ou expirado' })
   }
 }
