@@ -1,22 +1,28 @@
-import 'dotenv/config'
 import { NextFunction, Request, Response } from 'express'
-
 import jwt from 'jsonwebtoken'
 
-export default (req: Request, res: Response, next: NextFunction) => {
-  const authHeader = req.headers.authorization
+import userRepository from '../repository/user-repository'
 
-  if (!authHeader) return res.status(401).send('Token not provided')
-
-  const [, token] = authHeader.split(' ')
+export default async (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization
+  if (!token)
+    return res.status(401).json({ error: true, message: 'Token não informado' })
 
   try {
-    const payload = jwt.verify(token, process.env.APP_SECRET) as { userId: string }
+    const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
+      userId: string
+    }
 
-    req.userId = payload.userId
+    const user = await userRepository.findById(userId)
+    if (!user)
+      return res
+        .status(401)
+        .json({ error: true, message: 'Token não pertence a nenhum usuário' })
+
+    req.userId = userId
 
     return next()
-  } catch (err) {
-    return res.status(401).send('Invalid token')
+  } catch (error) {
+    return res.status(401).json({ error: true, message: 'Token inválido' })
   }
 }
