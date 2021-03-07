@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import connection from '../database/connection'
 
 interface CreateUserProps {
@@ -9,9 +10,17 @@ interface CreateUserProps {
   token: string
 }
 
-interface UserEntity extends CreateUserProps {
-  avatarUrl?: string
+interface UserEntity {
+  id: string
+  username: string
+  name: string
+  email: string
+  password_hash: string
+  token: string
+  avatar_url?: string
   description?: string
+  created_at: string
+  updated_at: string
 }
 
 const createUser = ({
@@ -27,7 +36,7 @@ const createUser = ({
     username,
     name,
     email,
-    passwordHash,
+    password_hash: passwordHash,
     token,
   })
 
