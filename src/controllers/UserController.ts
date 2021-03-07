@@ -44,7 +44,7 @@ class UserController {
       token,
     })
 
-    return res.json({
+    return res.status(201).json({
       error: false,
       message: 'Usuário criado com sucesso',
       userId,
