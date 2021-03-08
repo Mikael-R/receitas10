@@ -52,18 +52,9 @@ class UserController {
   }
 
   async show(req: Request, res: Response) {
-    const { id, username } = req.query
-    let user: UserEntity
+    const username = req.params.username
 
-    if (id && typeof id === 'string') {
-      user = await userRepository.findById(id)
-    } else if (username && typeof username === 'string') {
-      user = await userRepository.findByUsername(username)
-    } else {
-      return res
-        .status(422)
-        .json({ error: true, message: 'Parâmetros faltando' })
-    }
+    const user = await userRepository.findByUsername(username)
 
     if (!user) {
       return res
