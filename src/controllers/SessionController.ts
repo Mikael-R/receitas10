@@ -44,6 +44,7 @@ class SessionController {
         id: user.id,
         name: user.name,
         username: user.username,
+        email: user.email,
         token: user.token,
         avatarUrl: user.avatar_url,
         description: user.description,

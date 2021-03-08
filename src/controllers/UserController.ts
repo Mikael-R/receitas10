@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 
-import userRepository from '../repository/user-repository'
+import userRepository, { UserEntity } from '../repository/user-repository'
 import generateToken from '../tools/generateToken'
 
 class UserController {
@@ -52,13 +52,19 @@ class UserController {
   }
 
   async show(req: Request, res: Response) {
-    const { username } = req.query
-    if (!username || typeof username !== 'string')
+    const { id, username } = req.query
+    let user: UserEntity
+
+    if (id && typeof id === 'string') {
+      user = await userRepository.findById(id)
+    } else if (username && typeof username === 'string') {
+      user = await userRepository.findByUsername(username)
+    } else {
       return res
         .status(422)
         .json({ error: true, message: 'Parâmetros faltando' })
+    }
 
-    const user = await userRepository.findByUsername(username)
     if (!user) {
       return res
         .status(404)
@@ -72,7 +78,6 @@ class UserController {
         id: user.id,
         name: user.name,
         username: user.username,
-        email: user.email,
         avatarUrl: user.avatar_url,
         description: user.description,
         createAccountAt: user.created_at,

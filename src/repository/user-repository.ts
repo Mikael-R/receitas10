@@ -10,7 +10,7 @@ interface CreateUserProps {
   token: string
 }
 
-interface UserEntity {
+export interface UserEntity {
   id: string
   username: string
   name: string
