@@ -1,6 +1,8 @@
 import bcrypt from 'bcryptjs'
 import { Request, Response } from 'express'
 
+import generateToken from '../tools/generateToken'
+import ValidToken from '../tools/ValidToken'
 import userRepository from '../repository/user-repository'
 
 class SessionController {
@@ -22,6 +24,16 @@ class SessionController {
     const isPasswordCorrect = await bcrypt.compare(password, user.password_hash)
     if (!isPasswordCorrect)
       return res.status(401).json({ error: true, message: 'Senha incorreta' })
+
+    const validToken = new ValidToken(user.token, process.env.APP_SECRET)
+    if (!validToken.isValid) {
+      user.token = await generateToken(
+        { userId: user.id },
+        process.env.APP_SECRET
+      )
+
+      await userRepository.updateUserToken(user.id, user.token)
+    }
 
     await userRepository.updateUserLastSessionDate(user.id)
 

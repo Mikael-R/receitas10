@@ -61,6 +61,9 @@ const updateUserLastSessionDate = (id: string) =>
     .where('id', id)
     .update('last_session_at', new Date().getTime())
 
+const updateUserToken = (id: string, token: string) =>
+  knex<UserEntity>('users').where('id', id).update('token', token)
+
 export default {
   createUser,
   existsEmail,
@@ -69,4 +72,5 @@ export default {
   findByEmail,
   findByUsername,
   updateUserLastSessionDate,
+  updateUserToken,
 }
