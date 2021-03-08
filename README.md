@@ -1,8 +1,9 @@
-# receita10-api
+# receitas10-api
 
 ```
 Comment
 {
+  id: string
   user: {
     id: string
     name: string
@@ -116,7 +117,7 @@ Recipe
 
 ### Buscar receitas de usuário(paginação)
 
-* URL: https://domain/search-recipes/user?username=username
+* URL: https://domain/search-recipes/user/:user-id
 
 * Retorno:
 ```
@@ -130,7 +131,7 @@ Recipe
 
 ### Comentários de receita(paginação)
 
-* URL: https://dominio/search-recipes/comments?name=name
+* URL: https://dominio/search-recipes/comments/:recipe-id
 
 * Retorno
 ```
@@ -142,11 +143,23 @@ Recipe
 * Erros:
   * Receita não encontrada
 
+### Comentários de usuário em receitas(paginação)
+
+* URL: https://dominio/users/comments/:user-id
+
+* Retorno
+```
+{
+  comments: Comment[]
+}
+```
+
+* Erros:
+  * Usuário não encontrado
+
 ### Informações de usuário
 
-* Observações: pode buscar por username OU id
-
-* URL: https://domain/users?username=username?id=user-id
+* URL: https://domain/users/:user-id
 
 * Retorno:
 ```
@@ -171,7 +184,7 @@ Recipe
 
 ### Feed de usuário(paginação)
 
-* URL: https://domain/users/feed?username=username
+* URL: https://domain/users/feed/:user-id
 
 * Retorno:
 ```
@@ -187,7 +200,7 @@ Recipe
 
 ### Receitas curtidas de usuário(paginação)
 
-* URL: https://domain/users/recipes-liked?username=username
+* URL: https://domain/users/recipes-liked/:user-id
 
 * Retorno:
 ```
@@ -251,6 +264,7 @@ Recipe
     id: string
     name: string
     username: string
+    email: string
     token: string
     avatarUrl: string
     description: string
@@ -267,11 +281,13 @@ Recipe
 
 ### Adicionar receita(precisa de token)
 
-* URL: https://domain/recipe/:username/:recipe-name
+* URL: https://domain/recipes
 
 * Body:
 ```
 {
+  userId: string
+  recipeName: string
   preparationTime:
     | "rápido"
     | "até 1 hora"
@@ -320,11 +336,54 @@ Recipe
   * Nome da receita já está em uso por este usuário
   * Parâmetros faltando
 
+### Adicionar comentário em receita(precisa de token)
+
+* URL: https://domain/recipes/comments/:recipe-id
+
+* Erros:
+  * Receita não encontrada
+
 ## DELETE
+
+### Deletar usuário(precisa de token)
+
+* URL: https://domain/users/delete/:user-id
+
+* Retorno:
+```
+{
+  error: false
+  message: 'Usuário deletado com sucesso'
+  user: {
+    id: string
+  }
+}
+```
+
+* Erros:
+  * Usuário não encontrado
+
+### Deletar comentário(precisa de token)
+
+* URL: https://domain/users/delete-comment/:user-id
+
+* Retorno:
+```
+{
+  error: false
+  message: 'Usuário deletado com sucesso'
+  user: {
+    id: string
+  }
+}
+```
+
+* Erros:
+  * Usuário não encontrado
 
 ### Deletar receita(precisa de token)
 
-* URL: https://domain/recipe/:username/:recipe-name
+* URL: https://domain/recipes/delete/:recipe-id
 
 * Retorno:
 ```
@@ -366,7 +425,7 @@ Recipe
 
 ### Modificar receita(precisa de token)
 
-* URL: https://domain/recipe/:username/:nome-da-receita
+* URL: https://domain/recipes/:user-id/:recipe-id
 
 * Body:
 ```
@@ -421,3 +480,10 @@ Recipe
   * Usuário não encontrado
   * Receita não encontrada
   * Nenhum parâmetro para update foi informado
+
+### Remover/adicionar curtida em receita(precisa de token)
+
+* URL: https://domain/recipes/like/:recipe-id
+
+* Erros:
+  * Receita não encontrada
