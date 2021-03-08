@@ -23,7 +23,9 @@ class SessionController {
     if (!isPasswordCorrect)
       return res.status(401).json({ error: true, message: 'Senha incorreta' })
 
-    return res.json({
+    const lastLoginAt = await userRepository.updateUserLastLoginDate(user.id)
+
+    return res.status(302).json({
       error: false,
       message: 'Usuário encontrado',
       user: {
@@ -34,7 +36,7 @@ class SessionController {
         avatarUrl: user.avatar_url,
         description: user.description,
         createdAt: user.created_at,
-        updatedAt: user.updated_at,
+        lastLoginAt,
       },
     })
   }
