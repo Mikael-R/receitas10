@@ -1,16 +1,28 @@
 # receita10-api
 
-```json
-type Comment = { username: string; content: string, postedAt: Date }
+```
+Comment
+{
+  user: {
+    id: string
+    name: string
+    username: string
+    avatarUrl: string
+  }
+  content: string
+  postedAt: string
+}
 
-interface Recipe {
+Recipe
+{
+  id: string
   preparationTime:
     | "rápido"
     | "até 1 hora"
     | "até 2 horas"
     | "até 4 horas"
     | "até 6 horas"
-    | "mais de 6 horas";
+    | "mais de 6 horas"
   category:
     | "acompanhamento"
     | "bebida"
@@ -28,145 +40,155 @@ interface Recipe {
     | "pratos principais"
     | "sopas"
     | "temperos"
-    | "tortas";
-  ingredients: string[];
-  optionalIngredients: string[];
-  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10";
-  difficulty: "fácil" | "médio" | "difícil";
-  howToPrepare: string;
-  demoImages: string[];
-  additionalInformation: string;
-}
-
-interface UserRecipe extends Recipe {
-  username: string;
-  likes: number;
-  comments: Comment[];
-  postedAt: Date;
+    | "tortas"
+  ingredients: string[]
+  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
+  difficulty: "fácil" | "médio" | "difícil"
+  howToPrepare: string
+  demoImages: string[]
+  additionalInformation: string
+  likes: number
+  postedAt: string
 }
 ```
 
 ## GET
 
-### Buscar receitas
+### Buscar receitas(paginação)
 
-* URL: https://domain/searchRecipe
+* URL: https://domain/search-recipes
 
 * Body:
-```json
-type Body =
-  | { random: boolean }
-  | {
-      name: string;
-      servings?: ("até 2" | "até 4" | "até 6" | "até 10" | "mais de 10")[];
-      difficulty?: ("fácil" | "médio" | "difícil")[];
-      preparationTime?:(
-        | "rápido"
-        | "até 1 hora"
-        | "até 2 horas"
-        | "até 4 horas"
-        | "até 6 horas"
-        | "mais de 6 horas")[];
-      category?:(
-        | "acompanhamento"
-        | "bebida"
-        | "bolos"
-        | "carnes"
-        | "comidas fitness"
-        | "comidas típicas"
-        | "doces e sobremesas"
-        | "frango"
-        | "lanches"
-        | "massas"
-        | "molhos"
-        | "peixes"
-        | "petiscos"
-        | "pratos principais"
-        | "sopas"
-        | "temperos"
-        | "tortas")[];
-      moreLikes?: boolean;
-      moreComments?: boolean;
-      latest?: boolean;
-    };
+```
+{
+  name: string
+  servings?: ("até 2" | "até 4" | "até 6" | "até 10" | "mais de 10")[]
+  difficulty?: ("fácil" | "médio" | "difícil")[]
+  preparationTime?:(
+    | "rápido"
+    | "até 1 hora"
+    | "até 2 horas"
+    | "até 4 horas"
+    | "até 6 horas"
+    | "mais de 6 horas")[]
+  category?:(
+    | "acompanhamento"
+    | "bebida"
+    | "bolos"
+    | "carnes"
+    | "comidas fitness"
+    | "comidas típicas"
+    | "doces e sobremesas"
+    | "frango"
+    | "lanches"
+    | "massas"
+    | "molhos"
+    | "peixes"
+    | "petiscos"
+    | "pratos principais"
+    | "sopas"
+    | "temperos"
+    | "tortas")[]
+  moreLikes?: boolean
+  moreComments?: boolean
+  latest?: boolean
+}
 ```
 
 * Retorno:
-```json
-type Return = Recipe[]
+```
+{ recipes: Recipe[] }
 ```
 
-* ~~Errors:~~
+* Erros:
+  * Nenhum parâmetro de busca informado
 
+### Buscar receitas aleatórias(paginação)
+
+* URL: https://domain/search-recipes/random
+
+* Retorno:
+```
+{
+  recipes: Recipe[]
+}
+```
+
+### Buscar receitas de usuário(paginação)
+
+* URL: https://domain/search-recipes/user?username=username
+
+* Retorno:
+```
+{
+  recipes: Recipe[]
+}
+```
+
+* Erros:
+  * Usuário não encontrado
+
+### Comentários de receita(paginação)
+
+* URL: https://dominio/search-recipes/comments?name=name
+
+* Retorno
+```
+{
+  comments: Comment[]
+}
+```
+
+* Erros:
+  * Receita não encontrada
 
 ### Informações de usuário
 
-* URL: https://domain/user/:username
+* URL: https://domain/users?username=username
 
 * Retorno:
-```json
-type Return = {
-  name: string;
-  username: string;
-  email: string;
-  avatar: string;
-  description: string;
-  createAccountAt: Date;
-  feed: { title: string; description: string; data: Date; recipeURL: string }[];
-};
+```
+{
+  name: string
+  username: string
+  email: string
+  avatarUrl: string
+  description: string
+  createAccountAt: string
+  lastLoginAt: string
+}
 ```
 
-* Errors:
-  * User not found
+* Erros:
+  * Usuário não encontrado
 
-### Receitas curtidas
+### Feed de usuário(paginação)
 
-* URL: https://domain/recipesLiked/:username
+* URL: https://domain/users/feed?username=username
 
 * Retorno:
-```json
-type Return = Recipe[]
+```
+{
+  title: string
+  description: string
+  date: string
+}
 ```
 
-* Errors:
-  * User not found
+* Erros:
+  * Usuário não encontrado
 
-### Comentários em receitas
+### Receitas curtidas de usuário(paginação)
 
-* URL: https://domain/comments/:username
+* URL: https://domain/users/recipes-liked?username=username
 
 * Retorno:
-```json
-type Return = { recipeURL: string, comment: string, data: Date }[]
+```
+{ recipes: Recipe[] }
 ```
 
-* Errors:
-  * User not found
-
-### Receitas de usuário
-
-* URL: https://domain/recipes/:username
-
-* Retorno:
-```json
-type Return = Recipe[]
-```
-
-* Errors:
-  * User not found
-
-### Receita especifica de usuário
-
-* URL: https://domain/:username/:recipeName
-
-* Retorno:
-```json
-type Return = Recipe
-```
-
-* Errors:
-  * User not found
-  * Recipe not found
+* Erros:
+  * Usuário não encontrado
 
 ## POST
 
@@ -177,27 +199,27 @@ type Return = Recipe
 * Body:
 ```
 {
-  name: String
-  username: String
-  email: String
-  password: String
+  name: string
+  username: string
+  email: string
+  password: string
 }
 ```
 
-* Return:
+* Retorno:
 ```
 {
   error: false
   message: 'Usuário criado com sucesso',
-  userId: String,
+  userId: string,
 }
 ```
 
-* Errors:
+* Erros:
   * Parâmetros faltando
   * Username não pode ser menor que 2 ou maior que 12 caracteres
   * Este username já existe
-  * Este email já existe'
+  * Este email já existe
 
 ### Sign-in user
 
@@ -206,68 +228,48 @@ type Return = Recipe
 * Body:
 ```
 {
-  email: String
-  password: String
-}
-```
-
-* Return:
-```
-{
-  error: false,
-  message: 'Usuário encontrado',
-  user: {
-    id: String,
-    name: String,
-    username: String,
-    token: String,
-    avatarUrl: String,
-    description: String,
-    createdAt: String,
-    updatedAt: String
-  },
-    }
-```
-
-* Errors:
-  * Parâmetros faltando
-  * Usuário não encontrado
-  * Senha incorreta
-
-### Trocar senha
-
-* URL: https://domain/changePassword/:username
-
-* Body:
-```json
-interface Body {
   email: string
   password: string
 }
 ```
 
 * Retorno:
-```json
-interface Return { message: string, errors: { attribute: string, message: string }[] }
+```
+{
+  error: false
+  message: 'Usuário encontrado'
+  user: {
+    id: string
+    name: string
+    username: string
+    token: string
+    avatarUrl: string
+    description: string
+    createdAt: string
+    lastLoginAt: string
+  }
+}
 ```
 
-* Errors:
-  * User not found
+* Erros:
+  * Parâmetros faltando
+  * Usuário não encontrado
+  * Senha incorreta
 
-### Adicionar receita
+### Adicionar receita(precisa de token)
 
-* URL: https://domain/recipe/:username/:nome-da-receita
+* URL: https://domain/recipe/:username/:recipe-name
 
 * Body:
-```json
-interface Body {
+```
+{
   preparationTime:
     | "rápido"
     | "até 1 hora"
     | "até 2 horas"
     | "até 4 horas"
     | "até 6 horas"
-    | "mais de 6 horas";
+    | "mais de 6 horas"
   category:
     | "acompanhamento"
     | "bebida"
@@ -285,58 +287,92 @@ interface Body {
     | "pratos principais"
     | "sopas"
     | "temperos"
-    | "tortas";
-  ingredients: string[];
-  optionalIngredients: string[];
-  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10";
-  difficulty: "fácil" | "médio" | "difícil";
-  howToPrepare: string;
-  demoImages: string[];
-  additionalInformation: string;
+    | "tortas"
+  ingredients: string[]
+  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
+  difficulty: "fácil" | "médio" | "difícil"
+  howToPrepare: string
+  demoImages: string[]
+  additionalInformation: string
 }
 ```
 
 * Retorno:
-```json
-interface Return { message: string, errors: { attribute: string, message: string }[] }
+```
+{
+  error: false
+  message: 'Receita cadastrada'
+  recipe: Recipe
+}
 ```
 
-* Errors:
-  * User not found
-  * Name already used
-  * Need information
+* Erros:
+  * Usuário não encontrado
+  * Nome da receita já está em uso por este usuário
+  * Parâmetros faltando
 
 ## DELETE
 
-### Deletar receita
+### Deletar receita(precisa de token)
 
-* URL: https://domain/recipe/:username/:nome-da-receita
+* URL: https://domain/recipe/:username/:recipe-name
 
 * Retorno:
-```json
-interface Return { message: string, errors: { attribute: string, message: string }[] }
+```
+{
+  error: false
+  message: 'Receita deletada com sucesso'
+  recipe: {
+    id: string
+  }
+}
 ```
 
-* Errors:
-  * User not found
-  * Recipe not found
+* Erros:
+  * Usuário não encontrado
+  * Receita não encontrada
 
 ## PUT
 
-### Modificar receita
+### Trocar senha(precisa de token)
+
+* URL: https://domain/users/change-password/:username
+
+* Body:
+```
+{
+  email: string
+}
+```
+
+* Retorno:
+```
+{
+  error: false
+  message: 'A nova senha enviada para o seu email'
+  user: {
+    id: string
+  }
+}
+```
+
+* Erros:
+  * Usuário não encontrado
+
+### Modificar receita(precisa de token)
 
 * URL: https://domain/recipe/:username/:nome-da-receita
 
 * Body:
-```json
-interface Body {
+```
+{
   preparationTime:
     | "rápido"
     | "até 1 hora"
     | "até 2 horas"
     | "até 4 horas"
     | "até 6 horas"
-    | "mais de 6 horas";
+    | "mais de 6 horas"
   category:
     | "acompanhamento"
     | "bebida"
@@ -354,24 +390,29 @@ interface Body {
     | "pratos principais"
     | "sopas"
     | "temperos"
-    | "tortas";
-  ingredients: string[];
-  optionalIngredients: string[];
-  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10";
-  difficulty: "fácil" | "médio" | "difícil";
-  howToPrepare: string;
-  demoImages: string[];
-  additionalInformation: string;
+    | "tortas"
+  ingredients: string[]
+  optionalIngredients: string[]
+  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
+  difficulty: "fácil" | "médio" | "difícil"
+  howToPrepare: string
+  demoImages: string[]
+  additionalInformation: string
 }
 ```
 
 * Retorno:
-```json
-interface Return { message: string, errors: { attribute: string, message: string }[] }
+```
+{
+  erro: false
+  message: 'Receita foi atualizada com sucesso'
+  recipe: {
+    id: string
+  }
+}
 ```
 
-* Erro:
-  * User not found
-  * Recipe not found
-  * Need information
-
+* Erros:
+  * Usuário não encontrado
+  * Receita não encontrada
+  * Nenhum parâmetro para update foi informado
