@@ -117,7 +117,7 @@ Recipe
 
 ### Buscar receitas de usuário(paginação)
 
-* URL: https://domain/search-recipes/user/:user-id
+* URL: https://domain/search-recipes/user/:username
 
 * Retorno:
 ```
@@ -145,7 +145,7 @@ Recipe
 
 ### Comentários de usuário em receitas(paginação)
 
-* URL: https://dominio/users/comments/:user-id
+* URL: https://dominio/users/comments/:username
 
 * Retorno
 ```
@@ -159,7 +159,7 @@ Recipe
 
 ### Informações de usuário
 
-* URL: https://domain/users/:user-id
+* URL: https://domain/users/:username
 
 * Retorno:
 ```
@@ -179,12 +179,11 @@ Recipe
 ```
 
 * Erros:
-  * Parâmetros faltando
   * Usuário não encontrado
 
 ### Feed de usuário(paginação)
 
-* URL: https://domain/users/feed/:user-id
+* URL: https://domain/users/feed/:username
 
 * Retorno:
 ```
@@ -200,7 +199,7 @@ Recipe
 
 ### Receitas curtidas de usuário(paginação)
 
-* URL: https://domain/users/recipes-liked/:user-id
+* URL: https://domain/users/recipes-liked/:username
 
 * Retorno:
 ```
@@ -347,7 +346,7 @@ Recipe
 
 ### Deletar usuário(precisa de token)
 
-* URL: https://domain/users/delete/:user-id
+* URL: https://domain/users/delete/:username
 
 * Retorno:
 ```
@@ -365,7 +364,7 @@ Recipe
 
 ### Deletar comentário(precisa de token)
 
-* URL: https://domain/users/delete-comment/:user-id
+* URL: https://domain/users/delete-comment/:username
 
 * Retorno:
 ```
@@ -383,7 +382,7 @@ Recipe
 
 ### Deletar receita(precisa de token)
 
-* URL: https://domain/recipes/delete/:recipe-id
+* URL: https://domain/recipes/delete/:recipe-name
 
 * Retorno:
 ```
@@ -425,7 +424,7 @@ Recipe
 
 ### Modificar receita(precisa de token)
 
-* URL: https://domain/recipes/:user-id/:recipe-id
+* URL: https://domain/recipes/:username/:recipe-name
 
 * Body:
 ```
@@ -483,7 +482,7 @@ Recipe
 
 ### Remover/adicionar curtida em receita(precisa de token)
 
-* URL: https://domain/recipes/like/:recipe-id
+* URL: https://domain/recipes/like/:recipe-name
 
 * Erros:
   * Receita não encontrada
