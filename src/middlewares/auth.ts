@@ -11,13 +11,13 @@ export default async (req: Request, res: Response, next: NextFunction) => {
   const validToken = new ValidToken(token, process.env.APP_SECRET)
 
   if (validToken.isValid) {
-    const user = await userRepository.findById(validToken.payLoad.userId)
+    const user = await userRepository.findById(validToken.payload.userId)
     if (!user)
       return res
         .status(401)
         .json({ error: true, message: 'Token inválido ou expirado' })
 
-    req.userId = validToken.payLoad.userId
+    req.userId = validToken.payload.userId
 
     return next()
   } else {

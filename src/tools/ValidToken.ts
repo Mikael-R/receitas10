@@ -17,7 +17,7 @@ class ValidToken {
     }
   }
 
-  get payLoad(): TokenPayload | null {
+  get payload(): TokenPayload | null {
     try {
       const payload: TokenPayload = jwt.verify(
         this.token,
