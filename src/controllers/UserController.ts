@@ -1,9 +1,9 @@
 import { Request, Response } from 'express'
-import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 
 import userRepository from '../repository/user-repository'
+import generateToken from '../tools/generateToken'
 
 class UserController {
   async store(req: Request, res: Response) {
@@ -31,9 +31,7 @@ class UserController {
 
     const userId = uuidv4()
     const passwordHash = await bcrypt.hash(password, 8)
-    const token = jwt.sign({ userId }, process.env.APP_SECRET, {
-      expiresIn: '7d',
-    })
+    const token = await generateToken({ userId }, process.env.APP_SECRET)
 
     await userRepository.createUser({
       id: userId,
@@ -47,7 +45,9 @@ class UserController {
     return res.status(201).json({
       error: false,
       message: 'Usuário criado com sucesso',
-      userId,
+      user: {
+        id: userId,
+      },
     })
   }
 
