@@ -21,6 +21,7 @@ interface UserEntity {
   description?: string
   created_at: string
   updated_at: string
+  last_login_at?: string
 }
 
 const createUser = ({
@@ -53,10 +54,19 @@ const findById = (id: string) =>
 const findByEmail = (email: string) =>
   connection<UserEntity>('users').where('email', email).select('*').first()
 
+const updateUserLastLoginDate = async (id: string) => {
+  const currentDate = new Date()
+  await connection<UserEntity>('users')
+    .where('id', id)
+    .update('last_login_at', currentDate)
+  return currentDate
+}
+
 export default {
   createUser,
   existsEmail,
   existsUsername,
   findById,
   findByEmail,
+  updateUserLastLoginDate,
 }

@@ -10,7 +10,8 @@ export async function up(knex: Knex): Promise<void> {
     table.string('token').notNullable().unique()
     table.string('avatar_url')
     table.string('description')
-    table.timestamps(true, true)
+    table.timestamps(true, true) // created_at and updated_at
+    table.timestamp('last_login_at')
   })
 }
 
