@@ -9,6 +9,7 @@ const routes = Router()
 routes.get('/hello-no-auth', (_, res) => res.json({ message: 'hello no auth' }))
 
 routes.post('/users', UserController.store)
+routes.get('/users', UserController.show)
 routes.post('/sessions', SessionController.store)
 
 routes.use(authMiddleware)

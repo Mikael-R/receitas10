@@ -149,13 +149,18 @@ Recipe
 * Retorno:
 ```
 {
-  name: string
-  username: string
-  email: string
-  avatarUrl: string
-  description: string
-  createAccountAt: string
-  lastSessionAt: string
+  error: false
+  message: 'Usuário encontrado'
+  user: {
+    id: string
+    name: string
+    username: string
+    email: string
+    avatarUrl: string
+    description: string
+    createAccountAt: string
+    lastSessionAt: string
+  }
 }
 ```
 

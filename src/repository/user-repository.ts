@@ -53,6 +53,9 @@ const findById = (id: string) =>
 const findByEmail = (email: string) =>
   knex<UserEntity>('users').where('email', email).select('*').first()
 
+const findByUsername = (username: string) =>
+  knex<UserEntity>('users').where('username', username).select('*').first()
+
 const updateUserLastSessionDate = (id: string) =>
   knex<UserEntity>('users')
     .where('id', id)
@@ -64,5 +67,6 @@ export default {
   existsUsername,
   findById,
   findByEmail,
+  findByUsername,
   updateUserLastSessionDate,
 }

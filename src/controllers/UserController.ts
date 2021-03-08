@@ -50,6 +50,36 @@ class UserController {
       userId,
     })
   }
+
+  async show(req: Request, res: Response) {
+    const { username } = req.query
+    if (!username || typeof username !== 'string')
+      return res
+        .status(422)
+        .json({ error: true, message: 'Parâmetros faltando' })
+
+    const user = await userRepository.findByUsername(username)
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Usuário não encontrado' })
+    }
+
+    res.json({
+      error: false,
+      message: 'Usuário encontrado',
+      user: {
+        id: user.id,
+        name: user.name,
+        username: user.username,
+        email: user.email,
+        avatarUrl: user.avatar_url,
+        description: user.description,
+        createAccountAt: user.created_at,
+        lastSessionAt: user.last_session_at,
+      },
+    })
+  }
 }
 
 export default new UserController()
