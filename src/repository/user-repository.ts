@@ -54,13 +54,10 @@ const findById = (id: string) =>
 const findByEmail = (email: string) =>
   connection<UserEntity>('users').where('email', email).select('*').first()
 
-const updateUserLastLoginDate = async (id: string) => {
-  const currentDate = new Date()
-  await connection<UserEntity>('users')
+const updateUserLastLoginDate = (id: string) =>
+  connection<UserEntity>('users')
     .where('id', id)
-    .update('last_login_at', currentDate)
-  return currentDate
-}
+    .update('last_login_at', new Date().getTime())
 
 export default {
   createUser,

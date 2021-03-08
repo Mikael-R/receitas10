@@ -23,7 +23,7 @@ class SessionController {
     if (!isPasswordCorrect)
       return res.status(401).json({ error: true, message: 'Senha incorreta' })
 
-    const lastLoginAt = await userRepository.updateUserLastLoginDate(user.id)
+    await userRepository.updateUserLastLoginDate(user.id)
 
     return res.status(302).json({
       error: false,
@@ -36,7 +36,7 @@ class SessionController {
         avatarUrl: user.avatar_url,
         description: user.description,
         createdAt: user.created_at,
-        lastLoginAt,
+        lastLoginAt: user.last_login_at,
       },
     })
   }
