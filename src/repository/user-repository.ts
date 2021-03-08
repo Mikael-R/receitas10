@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import connection from '../database/connection'
+import knex from '../database/connection'
 
 interface CreateUserProps {
   id: string
@@ -21,7 +21,7 @@ interface UserEntity {
   description?: string
   created_at: string
   updated_at: string
-  last_login_at?: string
+  last_session_at?: string
 }
 
 const createUser = ({
@@ -32,7 +32,7 @@ const createUser = ({
   passwordHash,
   token,
 }: CreateUserProps) =>
-  connection<UserEntity>('users').insert({
+  knex<UserEntity>('users').insert({
     id,
     username,
     name,
@@ -42,22 +42,21 @@ const createUser = ({
   })
 
 const existsEmail = async (email: string) =>
-  !!(await connection<UserEntity>('users').where('email', email).first())?.id
+  !!(await knex<UserEntity>('users').where('email', email).first())?.id
 
 const existsUsername = async (username: string) =>
-  !!(await connection<UserEntity>('users').where('username', username).first())
-    ?.id
+  !!(await knex<UserEntity>('users').where('username', username).first())?.id
 
 const findById = (id: string) =>
-  connection<UserEntity>('users').where('id', id).select('*').first()
+  knex<UserEntity>('users').where('id', id).select('*').first()
 
 const findByEmail = (email: string) =>
-  connection<UserEntity>('users').where('email', email).select('*').first()
+  knex<UserEntity>('users').where('email', email).select('*').first()
 
-const updateUserLastLoginDate = (id: string) =>
-  connection<UserEntity>('users')
+const updateUserLastSessionDate = (id: string) =>
+  knex<UserEntity>('users')
     .where('id', id)
-    .update('last_login_at', new Date().getTime())
+    .update('last_session_at', new Date().getTime())
 
 export default {
   createUser,
@@ -65,5 +64,5 @@ export default {
   existsUsername,
   findById,
   findByEmail,
-  updateUserLastLoginDate,
+  updateUserLastSessionDate,
 }

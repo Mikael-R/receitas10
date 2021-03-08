@@ -155,7 +155,7 @@ Recipe
   avatarUrl: string
   description: string
   createAccountAt: string
-  lastLoginAt: string
+  lastSessionAt: string
 }
 ```
 
@@ -246,7 +246,7 @@ Recipe
     avatarUrl: string
     description: string
     createdAt: string
-    lastLoginAt: string
+    lastSessionAt: string
   }
 }
 ```
