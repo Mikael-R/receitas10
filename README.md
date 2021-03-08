@@ -144,7 +144,9 @@ Recipe
 
 ### Informações de usuário
 
-* URL: https://domain/users?username=username
+* Observações: pode buscar por username OU id
+
+* URL: https://domain/users?username=username?id=user-id
 
 * Retorno:
 ```
@@ -155,7 +157,6 @@ Recipe
     id: string
     name: string
     username: string
-    email: string
     avatarUrl: string
     description: string
     createAccountAt: string
@@ -165,6 +166,7 @@ Recipe
 ```
 
 * Erros:
+  * Parâmetros faltando
   * Usuário não encontrado
 
 ### Feed de usuário(paginação)
@@ -216,7 +218,9 @@ Recipe
 {
   error: false
   message: 'Usuário criado com sucesso',
-  userId: string,
+  user: {
+    id: string
+  }
 }
 ```
 
@@ -343,13 +347,6 @@ Recipe
 
 * URL: https://domain/users/change-password/:username
 
-* Body:
-```
-{
-  email: string
-}
-```
-
 * Retorno:
 ```
 {
@@ -357,6 +354,9 @@ Recipe
   message: 'A nova senha enviada para o seu email'
   user: {
     id: string
+    name: string
+    username: string
+    email: string
   }
 }
 ```
