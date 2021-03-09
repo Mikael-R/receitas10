@@ -21,7 +21,7 @@ class SessionController {
         .json({ error: true, message: 'Usuário não encontrado' })
     }
 
-    const isPasswordCorrect = await bcrypt.compare(password, user.password_hash)
+    const isPasswordCorrect = await bcrypt.compare(password, user.passwordHash)
     if (!isPasswordCorrect)
       return res.status(401).json({ error: true, message: 'Senha incorreta' })
 
@@ -46,10 +46,10 @@ class SessionController {
         username: user.username,
         email: user.email,
         token: user.token,
-        avatarUrl: user.avatar_url,
+        avatarUrl: user.avatarUrl,
         description: user.description,
-        createdAt: user.created_at,
-        lastSessionAt: user.last_session_at,
+        createdAt: user.createdAt,
+        lastSessionAt: user.lastSessionAt,
       },
     })
   }
