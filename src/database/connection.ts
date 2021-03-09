@@ -1,6 +1,10 @@
 import knex from 'knex'
-const knexConfigFile = require('../../knexfile')
+import knexConfigFile from '../../knexfile'
 
-const connection = knex(knexConfigFile.development)
+const connection = knex(
+  process.env.PRODUCTION
+    ? knexConfigFile.production
+    : knexConfigFile.development
+)
 
 export default connection
