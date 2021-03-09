@@ -14,6 +14,7 @@ routes.delete('/users/:username', authMiddleware, UserController.delete)
 routes.post('/sessions', SessionController.store)
 
 routes.post('/recipes', authMiddleware, RecipeController.store)
+routes.delete('/recipes/:recipeName', authMiddleware, RecipeController.delete)
 
 routes.get('/hello-no-auth', (_, res) => res.json({ message: 'hello no auth' }))
 routes.get('/hello-with-auth', authMiddleware, (req: Request, res) =>

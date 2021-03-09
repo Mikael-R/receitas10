@@ -82,6 +82,34 @@ class RecipeController {
       },
     })
   }
+
+  async delete(req: Request, res: Response) {
+    const { recipeName } = req.params
+    const authorId = req.userId
+
+    const recipe = await recipeRepository.findByAuthorIdAndName(
+      authorId,
+      recipeName
+    )
+
+    if (!recipe) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Receita não encontrada' })
+    }
+
+    await recipeRepository.deleteRecipe(authorId, recipeName)
+
+    res.json({
+      error: false,
+      message: 'Receita deletada com sucesso',
+      recipe: {
+        id: recipe.id,
+        authorId,
+        name: recipeName,
+      },
+    })
+  }
 }
 
 export default new RecipeController()

@@ -77,4 +77,7 @@ const findByAuthorIdAndName = async (authorId: string, name: string) =>
     .select('*')
     .first()
 
-export default { createRecipe, findByAuthorIdAndName }
+const deleteRecipe = async (authorId: string, name: string) =>
+  knex<RecipeEntity>('recipes').where({ authorId }).where({ name }).delete()
+
+export default { createRecipe, findByAuthorIdAndName, deleteRecipe }
