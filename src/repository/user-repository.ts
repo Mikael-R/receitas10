@@ -57,6 +57,12 @@ const updateUserLastSessionDate = (id: string) =>
 const updateUserToken = (id: string, token: string) =>
   knex<UserEntity>('users').where({ id }).update('token', token)
 
+const deleteWithRecipesById = async (id: string) => {
+  await knex<UserEntity>('users').where({ id }).delete()
+
+  await knex('recipes').where('authorId', id).delete()
+}
+
 export default {
   createUser,
   existsEmail,
@@ -66,4 +72,5 @@ export default {
   findByUsername,
   updateUserLastSessionDate,
   updateUserToken,
+  deleteWithRecipesById,
 }

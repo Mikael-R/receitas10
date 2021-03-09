@@ -76,6 +76,28 @@ class UserController {
       },
     })
   }
+
+  async delete(req: Request, res: Response) {
+    const username = req.params.username
+
+    const user = await userRepository.findByUsername(username)
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Usuário não encontrado' })
+    }
+
+    await userRepository.deleteWithRecipesById(user.id)
+
+    res.json({
+      error: false,
+      message: 'Foram deletados o usuário e todas as suas receitas',
+      user: {
+        id: user.id,
+      },
+    })
+  }
 }
 
 export default new UserController()
