@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="tamanho">
     <div class="row align ">
       <div class="col top">
       <img class="logo" src="../assets/img/logo.png" alt="logo">
@@ -24,15 +24,13 @@ export default {
 .top{
   margin-top: 100px;
 }
-  div{
+  .tamanho{
    background-color: #FCF5E0;
    width: 100%;
-   height: 100vh;
   }
   .logo{
     width: 481px;
     height: 173px;
-
   }
   .align{
     display: flex;

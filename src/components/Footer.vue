@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="aling">
     <!-- <BannerFooter /> -->
     <img src="../assets/img/comida.png" alt="faixa comida" />
   </div>
@@ -14,14 +14,21 @@ export default {
 };
 </script>
 
-<style>
-div {
+<style scoped>
+  div {
   background-color: #fcf5e0;
 }
-img {
+.aling{
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+img {
+ 
   width: 100%;
   position: absolute;
+  margin-top: 6rem;
+  background-color: #fcf5e0;
+
 }
 </style>

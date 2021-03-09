@@ -13,7 +13,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 .btn-criar {
   background: #f5cb4c;
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -73,11 +73,11 @@ export default {};
 .input:focus,
 .input:active,
 .input:hover {
-  border: 1px solid #f5cb4c;
+  border: 1px solid #4E6F81;
 }
 .btn-criar:hover,
 .btn-criar:focus{
-border: 1px solid #4E6F81;
+border: 1px solid #F5CB4C;
 }
 .entrar:hover,
 .entrar:focus{

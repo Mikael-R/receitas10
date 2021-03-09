@@ -21,9 +21,8 @@ export default {
 <style>
 #app {
   font-family: 'Roboto', sans-serif;
-}
-div{
   background-color: #FCF5E0;
-  
+  height: 100vh;
+  width: 100vw;
 }
 </style>
