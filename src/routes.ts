@@ -2,19 +2,21 @@ import { Request, Router } from 'express'
 
 import UserController from './controllers/UserController'
 import SessionController from './controllers/SessionController'
+import RecipeController from './controllers/RecipeController'
 import authMiddleware from './middlewares/auth'
 
 const routes = Router()
 
-routes.get('/hello-no-auth', (_, res) => res.json({ message: 'hello no auth' }))
-
 routes.post('/users', UserController.store)
 routes.get('/users/:username', UserController.show)
+routes.delete('/users/:username', authMiddleware, UserController.delete)
+
 routes.post('/sessions', SessionController.store)
 
-routes.use(authMiddleware)
+routes.post('/recipes', authMiddleware, RecipeController.store)
 
-routes.get('/hello-with-auth', (req: Request, res) =>
+routes.get('/hello-no-auth', (_, res) => res.json({ message: 'hello no auth' }))
+routes.get('/hello-with-auth', authMiddleware, (req: Request, res) =>
   res.json({ message: req.userId })
 )
 
