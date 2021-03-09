@@ -4,10 +4,11 @@ import userRepository from '../repository/user-repository'
 import ValidToken from '../tools/ValidToken'
 
 export default async (req: Request, res: Response, next: NextFunction) => {
-  const token = req.headers.authorization
-  if (!token)
+  const authorizationHeader = req.headers.authorization
+  if (!authorizationHeader)
     return res.status(401).json({ error: true, message: 'Token não informado' })
 
+  const [, token] = authorizationHeader.split(' ')
   const validToken = new ValidToken(token, process.env.APP_SECRET)
 
   if (validToken.isValid) {
