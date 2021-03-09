@@ -2,7 +2,7 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import { v4 as uuidv4 } from 'uuid'
 
-import userRepository, { UserEntity } from '../repository/user-repository'
+import userRepository from '../repository/user-repository'
 import generateToken from '../tools/generateToken'
 
 class UserController {
@@ -62,17 +62,17 @@ class UserController {
         .json({ error: true, message: 'Usuário não encontrado' })
     }
 
-    res.json({
+    res.status(302).json({
       error: false,
       message: 'Usuário encontrado',
       user: {
         id: user.id,
         name: user.name,
         username: user.username,
-        avatarUrl: user.avatar_url,
+        avatarUrl: user.avatarUrl,
         description: user.description,
-        createAccountAt: user.created_at,
-        lastSessionAt: user.last_session_at,
+        createAccountAt: user.createdAt,
+        lastSessionAt: user.lastSessionAt,
       },
     })
   }

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import knex from '../database/connection'
 
 interface CreateUserProps {
@@ -10,18 +9,12 @@ interface CreateUserProps {
   token: string
 }
 
-export interface UserEntity {
-  id: string
-  username: string
-  name: string
-  email: string
-  password_hash: string
-  token: string
-  avatar_url?: string
+export interface UserEntity extends CreateUserProps {
+  avatarUrl?: string
   description?: string
-  created_at: string
-  updated_at: string
-  last_session_at?: string
+  createdAt: string
+  updatedAt: string
+  lastSessionAt?: string
 }
 
 const createUser = ({
@@ -37,32 +30,32 @@ const createUser = ({
     username,
     name,
     email,
-    password_hash: passwordHash,
+    passwordHash,
     token,
   })
 
 const existsEmail = async (email: string) =>
-  !!(await knex<UserEntity>('users').where('email', email).first())?.id
+  !!(await knex<UserEntity>('users').where({ email }).first())?.id
 
 const existsUsername = async (username: string) =>
-  !!(await knex<UserEntity>('users').where('username', username).first())?.id
+  !!(await knex<UserEntity>('users').where({ username }).first())?.id
 
 const findById = (id: string) =>
-  knex<UserEntity>('users').where('id', id).select('*').first()
+  knex<UserEntity>('users').where({ id }).select('*').first()
 
 const findByEmail = (email: string) =>
-  knex<UserEntity>('users').where('email', email).select('*').first()
+  knex<UserEntity>('users').where({ email }).select('*').first()
 
 const findByUsername = (username: string) =>
-  knex<UserEntity>('users').where('username', username).select('*').first()
+  knex<UserEntity>('users').where({ username }).select('*').first()
 
 const updateUserLastSessionDate = (id: string) =>
   knex<UserEntity>('users')
-    .where('id', id)
-    .update('last_session_at', new Date().getTime())
+    .where({ id })
+    .update('lastSessionAt', new Date().getTime())
 
 const updateUserToken = (id: string, token: string) =>
-  knex<UserEntity>('users').where('id', id).update('token', token)
+  knex<UserEntity>('users').where({ id }).update('token', token)
 
 export default {
   createUser,
