@@ -1,49 +1,70 @@
 <template>
   <div class="row align">
     <div class="card">
-    <h2 class="title">Ter a sua conta</h2>
-    <span class="sub-title">É rápido e facil</span>
-    <span class="hr"></span>
-    <Input :tipo="tipo" :texto="texto" v-model="valueNome"  />
-    <Input :tipo="tipo" :texto="email"  />
-    <Input :tipo="pass" :texto="txtSenha"  />
-    <Button :textoButton="textoButton" @enviar="submit()" />
-    <!-- <button @click="submit()">efef</button> -->
+      <h2 class="title">Ter a sua conta</h2>
+      <span class="sub-title">É rápido e facil</span>
+      <span class="hr"></span>
+      <form>
+      <div class="">
+        <input
+          class="input"
+          tepy="text"
+          placeholder="Seu nome"
+          v-model="valueNome"
+        />
+        <img v-if="validNome" class="img" :src="validNome" alt="check">
+        <!-- <img v-if="!validNome" class="img" src="../assets/img/negate.png" alt="check"> -->
+      </div>
+        <input
+          class="input"
+          tepy="text"
+          placeholder="Email"
+          v-model="valueEmail"
+        />
+        <input
+          class="input"
+          tepy="password"
+          placeholder="Senha"
+          v-model="valueSenha"
+        />
+        <Button textoButton="textoButton" @enviar="submit()" />
+      </form>
     </div>
   </div>
 </template>
 
 <script>
-import Input from '../components/input'
-import Button from '../components/Button'
+import Button from "../components/Button";
+// import Input from '../components/input'
 export default {
   components: {
-    Input,
-    Button
+    Button,
+    // Input
   },
-  data(){
-    return{
-      tipo: "text",
-      texto: "Seu nome",
-      pass: "password",
-      email: "E-mail",
-      txtSenha: "Senha",
-      textoButton: "Criar Conta",
-      valueNome: "",
-    }
+  data() {
+    return {
+      valueNome: null,
+      valueEmail: "",
+      valueSenha: "",
+      validNome: "",
+    };
   },
-  methods:{
-    submit(){
-      console.log('entrou');
-      if(this.valueNome.length < 0){
-        console.log('algo');
-      }
-    }
-  }
+  methods: {
+    submit() {
+      // if (this.valueNome != null || this.valueEmail != null || this.valueSenha != null) {
+        this.valueNome != null ? this.validNome = "../assets/img/check.png" : this.validNome = '../assets/img/negate.png'
+        console.log(this.validNome);
+        
+    },
+
+  },
 };
 </script>
 
 <style>
+.img{
+  width: 25px;
+}
 .card {
   width: 420px;
   height: 450px;
@@ -62,18 +83,34 @@ export default {
   align-items: center;
   justify-content: center;
 }
-.title{
+.title {
   font-family: Poppins !important;
   font-weight: 600;
   font-size: 31px;
   left: 536px;
   margin: 22px 122px 0 31px;
 }
-.sub-title{
+.sub-title {
   font-family: Poppins !important;
   font-size: 20px;
   line-height: 30px;
   margin: 0 122px 18px 31px;
 }
-
+.input {
+  background: #fff8ea;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 8px;
+  height: 45px;
+  padding: 14px;
+  margin: 16px 10px;
+  font-size: 20px;
+  line-height: 23px;
+  width: 22rem;
+}
+.input:focus,
+.input:active,
+.input:hover {
+  border: 1px solid #4e6f81;
+}
 </style>

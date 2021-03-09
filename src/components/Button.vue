@@ -1,5 +1,5 @@
 <template>
-  <button class="btn-criar" @click="$emit('enviar')">{{textoButton}}</button>
+  <button class="btn-criar" @click.prevent="$emit('enviar')">{{textoButton}}</button>
 </template>
 
 <script>

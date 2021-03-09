@@ -1,5 +1,5 @@
 <template>
-    <input class="input" :type="tipo" :placeholder="texto"  >
+    <input class="input" :type="tipo" :placeholder="texto"   >
 </template>
 
 <script>
@@ -7,7 +7,7 @@ export default {
   props: ['tipo', 'texto'],
   data(){
     return{
-      
+      data:this.value
     }
   },
    created:  async function(){
