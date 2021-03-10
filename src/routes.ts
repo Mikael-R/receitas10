@@ -22,7 +22,7 @@ routes.delete('/users/:username', authMiddleware, UserController.destroy)
 routes.post('/sessions', SessionController.store)
 
 routes.get('/recipes/search', RecipeController.index)
-// routes.get('/recipes/random', RecipeController.indexRandom)
+routes.get('/recipes/random', RecipeController.indexRandom)
 // routes.get('/recipes/:recipeName/:username', RecipeController.show)
 routes.post('/recipes', authMiddleware, RecipeController.store)
 // routes.put('/recipes', authMiddleware, RecipeController.update)

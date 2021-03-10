@@ -54,6 +54,17 @@ class RecipeController {
       .json({ error: false, message: 'Receitas encontradas', recipes })
   }
 
+  async indexRandom(req: Request, res: Response) {
+    const page: number = (req.query.page as any) || 1
+
+    const { count, recipes } = await recipeRepository.searchRandom(page)
+
+    return res
+      .status(302)
+      .header('X-Total-Count', count)
+      .json({ error: false, message: 'Receitas encontradas', recipes })
+  }
+
   async store(req: Request, res: Response) {
     const {
       name,
