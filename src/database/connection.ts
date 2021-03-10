@@ -1,5 +1,5 @@
 import knex from 'knex'
-import knexConfigFile from '../../knexfile'
+const knexConfigFile = require('../../knexfile')
 
 const connection = knex(
   process.env.PRODUCTION
