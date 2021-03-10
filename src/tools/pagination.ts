@@ -3,7 +3,7 @@ const pagination = (
   pageNumber: number,
   pageSize: number
 ): [string, any[]] => {
-  const count = (array.length / pageSize + 1).toFixed(0)
+  const count = (array.length / pageSize).toFixed(0)
   const sliced = array.slice(
     (pageNumber - 1) * pageSize,
     (pageNumber - 1) * pageSize + pageSize
