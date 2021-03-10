@@ -1,9 +1,9 @@
 <template>
   <div class="card animeLeft">
-    <input type="text" class="input" placeholder="E-mail" />
-    <input type="password" class="input" placeholder="Senha" />
+    <input type="text" class="input form-control" placeholder="E-mail" />
+    <input type="password" class="input form-control" placeholder="Senha" />
     <button class="entrar">Entrar</button>
-    <router-link class="esqueci" to="home">Esqueceu sua senha?</router-link>
+    <router-link class="esqueci" to="esqueceu-senha">Esqueceu sua senha?</router-link>
     <span class="hr"></span>
     <button class="btn-criar" @click="cadastrar()">Criar conta</button>
   </div>
@@ -38,7 +38,6 @@ export default {
   margin: 0 25px;
 }
 .card {
-  width: 420px;
   height: 370px;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -56,8 +55,6 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   border-radius: 8px;
-  --width: 180px;
-  height: 45px;
   padding: 26px;
   margin: 16px 10px;
   font-size: 20px;

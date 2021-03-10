@@ -1,19 +1,11 @@
 <template>
   <div class="row align animeLeft">
-    <div class="card" v-if="cadastrado">
-      <h2 class="title">Ter a sua conta</h2>
-      <span class="subtitle">É rápido e facil</span>
+    <div class="card" >
+      <h2 class="title">Esqueceu sua senha?</h2>
+      <span class="subtitle">Insira seu email que lhe enviaremos uma senha TEMPORARIA.</span>
       <hr class="hr" />
       <form>
         <div class="">
-          <input
-            class="input"
-            tepy="text"
-            placeholder="Seu nome"
-            v-model="valueNome"
-          />
-          <!-- <img class="img" :src="validNome" alt="check"> -->
-          <!-- <img v-if="!validNome" class="img" src="../assets/img/negate.png" alt="check"> -->
         </div>
         <input
           class="input"
@@ -21,23 +13,8 @@
           placeholder="Email"
           v-model="valueEmail"
         />
-        <input
-          class="input"
-          tepy="password"
-          placeholder="Senha"
-          v-model="valueSenha"
-        />
-        <Button textoButton="Criar conta" @enviar="submit()" />
+        <Button textoButton="Enviar" @enviar="submit()" />
       </form>
-    </div>
-    <div class="card-concluido" v-if="!cadastrado">
-      <h2 style="margin: 21px 0 15px 25px">Parabéns!</h2>
-      <hr class="hr" style="margin-bottom: 19px" />
-      <p class="subtitle-concluido" style="margin: 25px 52px 25px 25px">
-        Seu cadastro foi um sucesso! Comece agora a participar dessa comunidade
-        cheia de sabores!
-      </p>
-    <button class="button" @click="voltar()">Voltar ao início</button>
     </div>
   </div>
 </template>
@@ -61,12 +38,7 @@ export default {
   },
   methods: {
     submit() {
-      // if (this.valueNome != null || this.valueEmail != null || this.valueSenha != null) {
-      this.valueNome != null
-        ? (this.validNome = "../assets/img/check.png")
-        : (this.validNome = "../assets/img/negate.png");
-      console.log(this.validNome);
-      this.cadastrado = false
+      this.$router.push('login')
     },
     voltar(){
       this.$router.push('login')
@@ -87,15 +59,14 @@ box-sizing: border-box;
 border-radius: 8px;
 width: 213px;
 height: 50px;
-margin: 0 0 0 180px;
+margin: 0 0 0 329px;
 }
 
 .img {
   width: 25px;
 }
 .card {
-  width: 420px;
-  height: 450px;
+  height: 310px;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #e3d8b4;
@@ -128,7 +99,7 @@ margin: 0 0 0 180px;
 }
 .subtitle {
   font-family: Poppins !important;
-  font-size: 20px;
+  font-size:18px;
   line-height: 30px;
   margin: 0 122px 18px 31px;
 }
@@ -149,7 +120,7 @@ margin: 0 0 0 180px;
   margin: 16px 10px;
   font-size: 20px;
   line-height: 23px;
-  width: 22rem;
+  width: 32rem;
 }
 .input:focus,
 .input:active,
