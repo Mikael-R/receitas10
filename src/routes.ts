@@ -13,6 +13,7 @@ routes.delete('/users/:username', authMiddleware, UserController.delete)
 
 routes.post('/sessions', SessionController.store)
 
+routes.get('/recipes/search', RecipeController.index)
 routes.post('/recipes', authMiddleware, RecipeController.store)
 routes.delete('/recipes/:recipeName', authMiddleware, RecipeController.delete)
 

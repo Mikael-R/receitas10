@@ -43,6 +43,14 @@ export interface RecipeEntity extends CreateRecipeProps {
   likes: number
 }
 
+interface SearchRecipeProps {
+  name: string
+  preparationTimes: string[]
+  categories: string[]
+  servings: string[]
+  difficulties: string[]
+}
+
 const createRecipe = ({
   id,
   authorId,
@@ -72,12 +80,31 @@ const createRecipe = ({
 
 const findByAuthorIdAndName = async (authorId: string, name: string) =>
   knex<RecipeEntity>('recipes')
-    .where({ name })
     .where({ authorId })
+    .where({ name })
     .select('*')
     .first()
+
+const search = async ({
+  name,
+  preparationTimes,
+  categories,
+  servings,
+  difficulties,
+}: SearchRecipeProps) => {
+  const query = knex<RecipeEntity>('recipes').select('*')
+
+  if (name) query.where('name', 'like', `%${name}%`)
+  if (preparationTimes.length)
+    query.whereIn('preparationTime', preparationTimes)
+  if (categories.length) query.whereIn('category', categories)
+  if (servings.length) query.whereIn('servings', servings)
+  if (difficulties.length) query.whereIn('difficulty', difficulties)
+
+  return query
+}
 
 const deleteRecipe = async (authorId: string, name: string) =>
   knex<RecipeEntity>('recipes').where({ authorId }).where({ name }).delete()
 
-export default { createRecipe, findByAuthorIdAndName, deleteRecipe }
+export default { createRecipe, search, findByAuthorIdAndName, deleteRecipe }

@@ -2,8 +2,60 @@ import { Request, Response } from 'express'
 import { v4 as uuidv4 } from 'uuid'
 
 import recipeRepository from '../repository/recipe-repository'
+import isArray from '../tools/isArray'
 
 class RecipeController {
+  async index(req: Request, res: Response) {
+    const {
+      name = '',
+      preparationTimes = [],
+      categories = [],
+      servings = [],
+      difficulties = [],
+    } = req.body
+
+    if (
+      typeof name !== 'string' ||
+      !isArray(preparationTimes) ||
+      !isArray(categories) ||
+      !isArray(servings) ||
+      !isArray(difficulties)
+    )
+      return res.status(403).json({
+        error: true,
+        message: 'Parâmetros informados não tem os tipos corretos',
+      })
+
+    if (
+      !name &&
+      !preparationTimes.length &&
+      !categories.length &&
+      !servings.length &&
+      !difficulties.length
+    )
+      return res
+        .status(422)
+        .json({ error: true, message: 'Nenhum parâmetro foi informado' })
+
+    const recipes = await recipeRepository.search({
+      name,
+      preparationTimes,
+      categories,
+      servings,
+      difficulties,
+    })
+
+    if (!recipes.length) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Nenhuma receita encontrada' })
+    }
+
+    return res
+      .status(302)
+      .json({ error: false, message: 'Receitas encontradas', recipes })
+  }
+
   async store(req: Request, res: Response) {
     const {
       name,
