@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { v4 as uuidv4 } from 'uuid'
 
 import recipeRepository from '../repository/recipe-repository'
+import userRepository from '../repository/user-repository'
 import isArray from '../tools/isArray'
 
 class RecipeController {
@@ -63,6 +64,31 @@ class RecipeController {
       .status(302)
       .header('X-Total-Count', count)
       .json({ error: false, message: 'Receitas encontradas', recipes })
+  }
+
+  async show(req: Request, res: Response) {
+    const { username, recipeName } = req.params
+
+    const user = await userRepository.findByUsername(username)
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Usuário não encontrado' })
+    }
+
+    const recipe = await recipeRepository.findByAuthorIdAndName(
+      user.id,
+      recipeName
+    )
+    if (!recipe) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Receita não encontrada' })
+    }
+
+    return res
+      .status(302)
+      .json({ error: false, message: 'Receita encontrada', recipe })
   }
 
   async store(req: Request, res: Response) {
