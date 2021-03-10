@@ -1,16 +1,24 @@
 <template>
-  <div class="card">
+  <div class="card animeLeft">
     <input type="text" class="input" placeholder="E-mail" />
     <input type="password" class="input" placeholder="Senha" />
     <button class="entrar">Entrar</button>
     <router-link class="esqueci" to="home">Esqueceu sua senha?</router-link>
     <span class="hr"></span>
-    <button class="btn-criar">Criar conta</button>
+    <button class="btn-criar" @click="cadastrar()">Criar conta</button>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods:{
+    cadastrar(){
+      this.$router.push('cadastro')
+    }
+  }
+};
+
+
 </script>
 
 <style scoped>
