@@ -133,7 +133,7 @@ class RecipeController {
     })
   }
 
-  async delete(req: Request, res: Response) {
+  async destroy(req: Request, res: Response) {
     const { recipeName } = req.params
     const authorId = req.userId
 

@@ -77,7 +77,7 @@ class UserController {
     })
   }
 
-  async delete(req: Request, res: Response) {
+  async destroy(req: Request, res: Response) {
     const username = req.params.username
 
     const user = await userRepository.findByUsername(username)
