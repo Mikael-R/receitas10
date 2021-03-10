@@ -122,6 +122,20 @@ const searchRandom = async (pageNumber: number, pageSize: number = 5) => {
   return { count, recipes }
 }
 
+const findRecipesByAuthorId = async (
+  authorId: string,
+  pageNumber: number,
+  pageSize: number = 5
+) => {
+  const query = await knex<RecipeEntity>('recipes')
+    .where({ authorId })
+    .select('*')
+
+  const [count, recipes] = pagination(query, pageNumber, pageSize)
+
+  return { count, recipes }
+}
+
 const deleteRecipe = async (authorId: string, name: string) =>
   knex<RecipeEntity>('recipes').where({ authorId }).where({ name }).delete()
 
@@ -130,5 +144,6 @@ export default {
   findByAuthorIdAndName,
   search,
   searchRandom,
+  findRecipesByAuthorId,
   deleteRecipe,
 }

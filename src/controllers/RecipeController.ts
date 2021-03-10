@@ -66,6 +66,28 @@ class RecipeController {
       .json({ error: false, message: 'Receitas encontradas', recipes })
   }
 
+  async indexUser(req: Request, res: Response) {
+    const { username } = req.params
+    const page: number = (req.query.page as any) || 1
+
+    const user = await userRepository.findByUsername(username)
+    if (!user) {
+      return res
+        .status(404)
+        .json({ error: true, message: 'Usuário não encontrado' })
+    }
+
+    const { count, recipes } = await recipeRepository.findRecipesByAuthorId(
+      user.id,
+      page
+    )
+
+    return res
+      .status(302)
+      .header('X-Total-Count', count)
+      .json({ error: false, message: 'Receitas encontradas', recipes })
+  }
+
   async show(req: Request, res: Response) {
     const { username, recipeName } = req.params
 

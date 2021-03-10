@@ -15,16 +15,16 @@ const routes = Router()
 // update – Salva a atualização do dado
 // destroy – Remove o dado
 
-routes.post('/users', UserController.store)
 routes.get('/users/:username', UserController.show)
+routes.post('/users', UserController.store)
 routes.delete('/users/:username', authMiddleware, UserController.destroy)
 
 routes.post('/sessions', SessionController.store)
 
 routes.get('/recipes/search', RecipeController.index)
 routes.get('/recipes/random', RecipeController.indexRandom)
+routes.get('/recipes/:username', RecipeController.indexUser)
 routes.get('/recipes/:username/:recipeName', RecipeController.show)
-// routes.get('/recipes/:username', RecipeController.indexUser)
 routes.post('/recipes', authMiddleware, RecipeController.store)
 // routes.put('/recipes', authMiddleware, RecipeController.update)
 routes.delete('/recipes/:recipeName', authMiddleware, RecipeController.destroy)
