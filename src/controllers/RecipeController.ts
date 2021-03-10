@@ -13,6 +13,7 @@ class RecipeController {
       servings = [],
       difficulties = [],
     } = req.body
+    const page: number = (req.query.page as any) || 1
 
     if (
       typeof name !== 'string' ||
@@ -37,22 +38,19 @@ class RecipeController {
         .status(422)
         .json({ error: true, message: 'Nenhum parâmetro foi informado' })
 
-    const recipes = await recipeRepository.search({
-      name,
-      preparationTimes,
-      categories,
-      servings,
-      difficulties,
-    })
-
-    if (!recipes.length) {
-      return res
-        .status(404)
-        .json({ error: true, message: 'Nenhuma receita encontrada' })
-    }
-
+    const { count, recipes } = await recipeRepository.search(
+      {
+        name,
+        preparationTimes,
+        categories,
+        servings,
+        difficulties,
+      },
+      page
+    )
     return res
       .status(302)
+      .header('X-Total-Count', count)
       .json({ error: false, message: 'Receitas encontradas', recipes })
   }
 

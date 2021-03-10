@@ -1,5 +1,7 @@
 import knex from '../database/connection'
 
+import pagination from '../tools/pagination'
+
 interface CreateRecipeProps {
   id: string
   authorId: string
@@ -85,13 +87,17 @@ const findByAuthorIdAndName = async (authorId: string, name: string) =>
     .select('*')
     .first()
 
-const search = async ({
-  name,
-  preparationTimes,
-  categories,
-  servings,
-  difficulties,
-}: SearchRecipeProps) => {
+const search = async (
+  {
+    name,
+    preparationTimes,
+    categories,
+    servings,
+    difficulties,
+  }: SearchRecipeProps,
+  pageNumber: number,
+  pageSize: number = 5
+) => {
   const query = knex<RecipeEntity>('recipes').select('*')
 
   if (name) query.where('name', 'like', `%${name}%`)
@@ -101,10 +107,17 @@ const search = async ({
   if (servings.length) query.whereIn('servings', servings)
   if (difficulties.length) query.whereIn('difficulty', difficulties)
 
-  return query
+  const [count, recipes] = pagination(await query, pageNumber, pageSize)
+
+  return { count, recipes }
 }
 
 const deleteRecipe = async (authorId: string, name: string) =>
   knex<RecipeEntity>('recipes').where({ authorId }).where({ name }).delete()
 
-export default { createRecipe, search, findByAuthorIdAndName, deleteRecipe }
+export default {
+  createRecipe,
+  search,
+  findByAuthorIdAndName,
+  deleteRecipe,
+}
