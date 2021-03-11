@@ -3,11 +3,7 @@ import { Knex } from 'knex'
 export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable('recipes', function (table) {
     table.uuid('id').primary().notNullable().unique()
-    table
-      .uuid('authorId')
-      .references('user.id')
-      .notNullable()
-      .onDelete('CASCADE')
+    table.uuid('authorId').notNullable()
     table.string('name').notNullable()
     table.string('preparationTime').notNullable()
     table.string('category').notNullable()
@@ -19,7 +15,7 @@ export async function up(knex: Knex): Promise<void> {
     table.text('additionalInformation')
     table.integer('likes').notNullable().defaultTo(0)
     table.timestamp('createdAt').notNullable().defaultTo(new Date().getTime())
-    table.timestamp('updatedAt')
+    table.timestamp('updatedAt').notNullable().defaultTo(new Date().getTime())
   })
 }
 

@@ -2,7 +2,7 @@ import knex from '../database/connection'
 
 import pagination from '../tools/pagination'
 
-interface CreateRecipeProps {
+interface RecipeEntity {
   id: string
   authorId: string
   name: string
@@ -39,10 +39,23 @@ interface CreateRecipeProps {
   howPrepare: string
   demoImages?: string
   additionalInformation?: string
+  likes: number
+  createdAt: number
+  updatedAt: number
 }
 
-export interface RecipeEntity extends CreateRecipeProps {
-  likes: number
+interface CreateRecipeProps {
+  id: string
+  authorId: string
+  name: string
+  preparationTime: string
+  category: string
+  ingredients: string
+  servings: string
+  difficulty: string
+  howPrepare: string
+  demoImages?: string
+  additionalInformation?: string
 }
 
 interface SearchRecipeProps {
@@ -51,6 +64,17 @@ interface SearchRecipeProps {
   categories: string[]
   servings: string[]
   difficulties: string[]
+}
+
+interface UpdateRecipeProps {
+  preparationTime: string
+  category: string
+  ingredients: string
+  servings: string
+  difficulty: string
+  howPrepare: string
+  demoImages: string
+  additionalInformation: string
 }
 
 const createRecipe = ({
@@ -134,6 +158,39 @@ const findRecipesByAuthorId = async (
   const [count, recipes] = pagination(query, pageNumber, pageSize)
 
   return { count, recipes }
+}
+
+const updateRecipe = async (
+  authorId: string,
+  name: string,
+  {
+    preparationTime,
+    category,
+    ingredients,
+    servings,
+    difficulty,
+    howPrepare,
+    demoImages,
+    additionalInformation,
+  }: UpdateRecipeProps
+) => {
+  const query = knex<RecipeEntity>('recipes')
+    .where({ authorId })
+    .where({ name })
+    .update({
+      updatedAt: new Date().getTime(),
+    })
+
+  if (preparationTime) query.update({ preparationTime })
+  if (category) query.update({ category })
+  if (ingredients) query.update({ ingredients })
+  if (servings) query.update({ servings })
+  if (difficulty) query.update({ difficulty })
+  if (howPrepare) query.update({ preparationTime })
+  if (demoImages) query.update({ demoImages })
+  if (additionalInformation) query.update({ additionalInformation })
+
+  await query
 }
 
 const deleteRecipe = async (authorId: string, name: string) =>
