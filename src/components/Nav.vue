@@ -63,6 +63,9 @@ group-search {
   padding: 7px;
   cursor: pointer;
 }
+.input-search:focus {
+  outline: 0;
+}
 .btn-search {
   background: #fcf5e0;
   position: relative;

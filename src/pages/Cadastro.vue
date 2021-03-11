@@ -11,21 +11,24 @@
             tepy="text"
             placeholder="Seu nome"
             v-model="valueNome"
+            required
           />
           <!-- <img class="img" :src="validNome" alt="check"> -->
           <!-- <img v-if="!validNome" class="img" src="../assets/img/negate.png" alt="check"> -->
         </div>
         <input
           class="input"
-          tepy="text"
+          tepy="email"
           placeholder="Email"
           v-model="valueEmail"
+          required
         />
         <input
           class="input"
           tepy="password"
           placeholder="Senha"
           v-model="valueSenha"
+          required
         />
         <Button textoButton="Criar conta" @enviar="submit()" />
       </form>
@@ -76,18 +79,18 @@ export default {
 </script>
 
 <style scoped>
-.button{
+.button {
   font-weight: 500;
-font-size: 22px;
-line-height: 26px;
-color: #FCF5E0;
-background: #F5CB4C;
-border: 1px solid rgba(0, 0, 0, 0.3);
-box-sizing: border-box;
-border-radius: 8px;
-width: 213px;
-height: 50px;
-margin: 0 0 0 180px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #FCF5E0;
+  background: #F5CB4C;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 213px;
+  height: 50px;
+  margin: 0 0 0 180px;
 }
 
 .img {
@@ -155,5 +158,6 @@ margin: 0 0 0 180px;
 .input:active,
 .input:hover {
   border: 1px solid #4e6f81;
+  outline: 0;
 }
 </style>
