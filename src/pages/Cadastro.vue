@@ -6,49 +6,53 @@
       <hr class="hr" />
       <form>
         <div class="">
-          <input
+          <Input
             class="input"
-            tepy="text"
+            type="text"
             placeholder="Seu nome"
             v-model="valueNome"
+            required
           />
           <!-- <img class="img" :src="validNome" alt="check"> -->
           <!-- <img v-if="!validNome" class="img" src="../assets/img/negate.png" alt="check"> -->
         </div>
-        <input
+        <Input
           class="input"
-          tepy="text"
+          type="email"
           placeholder="Email"
           v-model="valueEmail"
+          required
         />
-        <input
+        <Input
           class="input"
-          tepy="password"
+          type="password"
           placeholder="Senha"
           v-model="valueSenha"
         />
-        <Button textoButton="Criar conta" @enviar="submit()" />
+        <Button type="submit" textoButton="Criar conta" @enviar="submit()" />
       </form>
     </div>
     <div class="card-concluido" v-if="!cadastrado">
       <h2 style="margin: 21px 0 15px 25px">Parabéns!</h2>
       <hr class="hr" style="margin-bottom: 19px" />
-      <p class="subtitle-concluido" style="margin: 25px 52px 25px 25px">
-        Seu cadastro foi um sucesso! Comece agora a participar dessa comunidade
+      <p class="subtitle-concluido">
+        Seu cadastro foi um sucesso!
+        <br/>
+        Comece agora a participar dessa comunidade
         cheia de sabores!
       </p>
-    <button class="button" @click="voltar()">Voltar ao início</button>
+      <button class="button" @click="voltar()">Voltar ao início</button>
     </div>
   </div>
 </template>
 
 <script>
 import Button from "../components/Button";
-// import Input from '../components/input'
+import Input from '../components/input'
 export default {
   components: {
-    Button
-    // Input
+    Button,
+    Input
   },
   data() {
     return {
@@ -66,28 +70,29 @@ export default {
         ? (this.validNome = "../assets/img/check.png")
         : (this.validNome = "../assets/img/negate.png");
       console.log(this.validNome);
-      this.cadastrado = false
+      this.cadastrado = false;
     },
-    voltar(){
-      this.$router.push('login')
-    }
+    voltar() {
+      this.$router.push("login");
+    },
   },
 };
 </script>
 
 <style scoped>
-.button{
+.button {
   font-weight: 500;
-font-size: 22px;
-line-height: 26px;
-color: #FCF5E0;
-background: #F5CB4C;
-border: 1px solid rgba(0, 0, 0, 0.3);
-box-sizing: border-box;
-border-radius: 8px;
-width: 213px;
-height: 50px;
-margin: 0 0 0 180px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #fcf5e0;
+  background: #f5cb4c;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 213px;
+  height: 50px;
+  margin-left: auto;
+  display: block;
 }
 
 .img {
@@ -102,12 +107,13 @@ margin: 0 0 0 180px;
   margin-top: 3rem;
 }
 .card-concluido {
-  width: 420px;
-  height: 291px;
+  width: 550px;
+  height: 290px;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #e3d8b4;
   margin-top: 3rem;
+  padding: 10px 20px;
 }
 .hr {
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -136,24 +142,7 @@ margin: 0 0 0 180px;
   font-family: Poppins !important;
   font-size: 20px;
   line-height: 30px;
-  margin: 0 122px 18px 20px;
-  text-align: center;
-}
-.input {
-  background: #fff8ea;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  border-radius: 8px;
-  height: 45px;
-  padding: 14px;
-  margin: 16px 10px;
-  font-size: 20px;
-  line-height: 23px;
-  width: 22rem;
-}
-.input:focus,
-.input:active,
-.input:hover {
-  border: 1px solid #4e6f81;
+  margin-left: 20px;
+  text-align: left;
 }
 </style>
