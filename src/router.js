@@ -13,7 +13,7 @@ export default new Router({
   mode: "history",
   routes: [
     { name: "login", path: "/login", component: Login },
-    { name: "home", path: "/home", component: Home },
+    { name: "home", path: "/", component: Home },
     { name: "cadastro", path: "/cadastro", component: Cadastro },
     { name: "esqueceu-senha", path: "/esqueceu-senha", component: EsqueceuSenha },
     // { path: "/stocks", component: Stocks },
