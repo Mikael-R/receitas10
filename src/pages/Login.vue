@@ -1,7 +1,7 @@
 <template>
   <div class="tamanho">
     <div class="row align">
-      <div class="col top">
+      <div class="col top" style="margin-left: 17rem;">
         <img class="logo" src="../assets/img/logo.png" alt="logo" />
       </div>
       <div class="col top" style="margin-right: 15rem;">

@@ -30,7 +30,7 @@ export default {
   color: #fff8ea;
   width: 180px;
   height: 55px;
-  margin: 23px 120px 16px 120px;
+  margin: 23px 11rem 16px 11rem;
 }
 .hr {
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -59,6 +59,7 @@ export default {
   margin: 16px 10px;
   font-size: 20px;
   line-height: 23px;
+  width: 32rem;
 }
 .entrar {
   height: 55px;
