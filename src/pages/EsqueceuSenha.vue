@@ -9,7 +9,7 @@
         </div>
         <input
           class="input"
-          tepy="text"
+          type="email"
           placeholder="Email"
           v-model="valueEmail"
         />
