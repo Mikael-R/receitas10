@@ -6,7 +6,7 @@
       <hr class="hr" />
       <form>
         <div class="">
-          <input
+          <Input
             class="input"
             type="text"
             placeholder="Seu nome"
@@ -16,14 +16,14 @@
           <!-- <img class="img" :src="validNome" alt="check"> -->
           <!-- <img v-if="!validNome" class="img" src="../assets/img/negate.png" alt="check"> -->
         </div>
-        <input
+        <Input
           class="input"
           type="email"
           placeholder="Email"
           v-model="valueEmail"
           required
         />
-        <input
+        <Input
           class="input"
           type="password"
           placeholder="Senha"
@@ -48,11 +48,11 @@
 
 <script>
 import Button from "../components/Button";
-// import Input from '../components/input'
+import Input from '../components/input'
 export default {
   components: {
     Button,
-    // Input
+    Input
   },
   data() {
     return {
@@ -144,23 +144,5 @@ export default {
   line-height: 30px;
   margin-left: 20px;
   text-align: left;
-}
-.input {
-  background: #fff8ea;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  border-radius: 8px;
-  height: 45px;
-  padding: 14px;
-  margin: 16px 10px;
-  font-size: 20px;
-  line-height: 23px;
-  width: 22rem;
-}
-.input:focus,
-.input:active,
-.input:hover {
-  border: 1px solid #4e6f81;
-  outline: 0;
 }
 </style>

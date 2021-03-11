@@ -22,14 +22,16 @@ export default {
   box-sizing: border-box;
   border-radius: 8px;
   height: 45px;
-  padding: 14px;
-  margin: 16px 10px;
+  padding: 10px;
+  margin: 16px 20px;
   font-size: 20px;
-  line-height: 23px;
+  line-height: 20px;
+  width: 22rem;
 }
 .input:focus,
 .input:active,
 .input:hover {
   border: 1px solid #4E6F81;
+  outline: 0;
 }
 </style>

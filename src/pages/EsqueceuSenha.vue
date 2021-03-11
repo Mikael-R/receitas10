@@ -7,7 +7,7 @@
       <form>
         <div class="">
         </div>
-        <input
+        <Input
           class="input"
           type="email"
           placeholder="Email"
@@ -21,11 +21,11 @@
 
 <script>
 import Button from "../components/Button";
-// import Input from '../components/input'
+import Input from '../components/input'
 export default {
   components: {
-    Button
-    // Input
+    Button,
+    Input
   },
   data() {
     return {
@@ -48,25 +48,26 @@ export default {
 </script>
 
 <style scoped>
-.button{
+.button {
   font-weight: 500;
-font-size: 22px;
-line-height: 26px;
-color: #FCF5E0;
-background: #F5CB4C;
-border: 1px solid rgba(0, 0, 0, 0.3);
-box-sizing: border-box;
-border-radius: 8px;
-width: 213px;
-height: 50px;
-margin: 0 0 0 329px;
+  font-size: 22px;
+  line-height: 26px;
+  color: #FCF5E0;
+  background: #F5CB4C;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 8px;
+  width: 213px;
+  height: 50px;
+  margin-left: auto;
+  display: block;
 }
 
 .img {
   width: 25px;
 }
 .card {
-  height: 310px;
+  height: 250px;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #e3d8b4;
@@ -109,22 +110,5 @@ margin: 0 0 0 329px;
   line-height: 30px;
   margin: 0 122px 18px 20px;
   text-align: center;
-}
-.input {
-  background: #fff8ea;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  border-radius: 8px;
-  height: 45px;
-  padding: 14px;
-  margin: 16px 10px;
-  font-size: 20px;
-  line-height: 23px;
-  width: 32rem;
-}
-.input:focus,
-.input:active,
-.input:hover {
-  border: 1px solid #4e6f81;
 }
 </style>
