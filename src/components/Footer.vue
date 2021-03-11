@@ -23,7 +23,7 @@ export default {
   flex-direction: row-reverse;
   justify-content: flex-end;
 }
-img {
+.aling img {
  
   width: 100%;
   position: absolute;
