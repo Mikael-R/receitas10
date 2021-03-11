@@ -8,7 +8,7 @@
         <div class="">
           <input
             class="input"
-            tepy="text"
+            type="text"
             placeholder="Seu nome"
             v-model="valueNome"
             required
@@ -18,29 +18,30 @@
         </div>
         <input
           class="input"
-          tepy="email"
+          type="email"
           placeholder="Email"
           v-model="valueEmail"
           required
         />
         <input
           class="input"
-          tepy="password"
+          type="password"
           placeholder="Senha"
           v-model="valueSenha"
-          required
         />
-        <Button textoButton="Criar conta" @enviar="submit()" />
+        <Button type="submit" textoButton="Criar conta" @enviar="submit()" />
       </form>
     </div>
     <div class="card-concluido" v-if="!cadastrado">
       <h2 style="margin: 21px 0 15px 25px">Parabéns!</h2>
       <hr class="hr" style="margin-bottom: 19px" />
-      <p class="subtitle-concluido" style="margin: 25px 52px 25px 25px">
-        Seu cadastro foi um sucesso! Comece agora a participar dessa comunidade
+      <p class="subtitle-concluido">
+        Seu cadastro foi um sucesso!
+        <br/>
+        Comece agora a participar dessa comunidade
         cheia de sabores!
       </p>
-    <button class="button" @click="voltar()">Voltar ao início</button>
+      <button class="button" @click="voltar()">Voltar ao início</button>
     </div>
   </div>
 </template>
@@ -50,7 +51,7 @@ import Button from "../components/Button";
 // import Input from '../components/input'
 export default {
   components: {
-    Button
+    Button,
     // Input
   },
   data() {
@@ -69,11 +70,11 @@ export default {
         ? (this.validNome = "../assets/img/check.png")
         : (this.validNome = "../assets/img/negate.png");
       console.log(this.validNome);
-      this.cadastrado = false
+      this.cadastrado = false;
     },
-    voltar(){
-      this.$router.push('login')
-    }
+    voltar() {
+      this.$router.push("login");
+    },
   },
 };
 </script>
@@ -83,14 +84,15 @@ export default {
   font-weight: 500;
   font-size: 22px;
   line-height: 26px;
-  color: #FCF5E0;
-  background: #F5CB4C;
+  color: #fcf5e0;
+  background: #f5cb4c;
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   border-radius: 8px;
   width: 213px;
   height: 50px;
-  margin: 0 0 0 180px;
+  margin-left: auto;
+  display: block;
 }
 
 .img {
@@ -105,12 +107,13 @@ export default {
   margin-top: 3rem;
 }
 .card-concluido {
-  width: 420px;
-  height: 291px;
+  width: 550px;
+  height: 290px;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #e3d8b4;
   margin-top: 3rem;
+  padding: 10px 20px;
 }
 .hr {
   border: 1px solid rgba(0, 0, 0, 0.3);
@@ -139,8 +142,8 @@ export default {
   font-family: Poppins !important;
   font-size: 20px;
   line-height: 30px;
-  margin: 0 122px 18px 20px;
-  text-align: center;
+  margin-left: 20px;
+  text-align: left;
 }
 .input {
   background: #fff8ea;
