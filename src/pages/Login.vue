@@ -22,39 +22,27 @@ export default {
 
 <style >
 .margin{
-  margin-left: 18rem;
+  margin-left: 6rem;
 }
 .margin-card{
-  margin-right: 8rem;
+  margin-right: 1rem;
 }
 .top {
   margin-top: 100px;
 }
 .tamanho {
   background-color: #fcf5e0;
-  width: 100%;
+  display: flex;
 }
 .logo {
-  width: 481px;
-  height: 173px;
+  width: 480px;
+  height: 170px;
 }
 .align {
   display: flex;
   align-items: center;
 }
-@media(max-width: 576px){
-  .margin{
-    margin-left: 4rem !important;
-  }
-  .top .margin{
-    margin-top: 13px;
-  }
-  .margin-card{
-  margin-left: 1rem;
-  margin-right: 0;
-}
-.top .margin-card{
+.top .margin-card {
   margin-top: 51px;
-}
 }
 </style>
