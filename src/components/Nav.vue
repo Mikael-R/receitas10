@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="nav-receitas">
-      <img src="../assets/img/logoNav.png" alt="logo" />
+      <div class="home">
+        <img src="../assets/img/logoNav.png" alt="logo" @click="home()">
+      </div>
       <div class="wrap">
         <div class="group-search">
           <input
@@ -31,15 +33,30 @@ export default {
     perfil() {
       this.$router.push("perfil");
     },
+    home() {
+      this.$router.push("/");
+    }
   },
-  
 };
 </script>
 
-<style >
+<style>
+.home:hover {
+  cursor: pointer;
+}
+.wrap:hover {
+  cursor: pointer;
+}
+.enviar:hover {
+  cursor: pointer;
+}
+.img:hover {
+  cursor: pointer;
+}
 .img img{
   width: 40px;
   height: 40px;
+  border-radius: 50%;
 }
 .enviar {
   display: flex;
