@@ -8,10 +8,15 @@ export async function up(knex: Knex): Promise<void> {
     table.string('email').notNullable().unique()
     table.string('passwordHash').notNullable()
     table.string('token').notNullable().unique()
-    table.string('avatarUrl')
+    table
+      .string('avatarUrl')
+      .notNullable()
+      .defaultTo(
+        'https://i.pinimg.com/564x/4a/cf/16/4acf16a2999a4c6dfdfe03f198b95b13.jpg'
+      )
     table.text('description')
     table.timestamp('createdAt').notNullable().defaultTo(new Date().getTime())
-    table.timestamp('updatedAt').notNullable().defaultTo(new Date().getTime())
+    table.timestamp('updatedAt')
     table.timestamp('lastSessionAt')
   })
 }

@@ -15,7 +15,7 @@ export async function up(knex: Knex): Promise<void> {
     table.text('additionalInformation')
     table.integer('likes').notNullable().defaultTo(0)
     table.timestamp('createdAt').notNullable().defaultTo(new Date().getTime())
-    table.timestamp('updatedAt').notNullable().defaultTo(new Date().getTime())
+    table.timestamp('updatedAt')
   })
 }
 
