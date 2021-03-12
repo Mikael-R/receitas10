@@ -2,7 +2,7 @@ import knex from '../database/connection'
 
 import pagination from '../tools/pagination'
 
-interface RecipeEntity {
+export interface RecipeEntity {
   id: string
   authorId: string
   name: string
@@ -203,4 +203,5 @@ export default {
   searchRandom,
   findRecipesByAuthorId,
   deleteRecipe,
+  updateRecipe,
 }
