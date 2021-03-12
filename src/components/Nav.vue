@@ -18,17 +18,29 @@
         <img src="../assets/img/shopping-list.png" alt="icon-shopping" />
         <span>ENVIE SUA RECEITA</span>
       </div>
+      <div class="img">
+        <img src="../assets/img/blanck.png" alt="foto perfil" @click="perfil()">
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  methods: {
+    perfil() {
+      this.$router.push("perfil");
+    },
+  },
   
 };
 </script>
 
 <style >
+.img img{
+  width: 40px;
+  height: 40px;
+}
 .enviar {
   display: flex;
   flex-direction: column;

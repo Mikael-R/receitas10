@@ -39,6 +39,7 @@ export default {
 }
 .card {
   height: 370px;
+  width: 34rem;
   border-radius: 8px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #e3d8b4;
@@ -89,4 +90,5 @@ border: 1px solid #F5CB4C;
 .entrar:focus{
 border: 1px solid #F5CB4C;
 }
+
 </style>
