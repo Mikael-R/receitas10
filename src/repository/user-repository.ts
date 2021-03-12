@@ -12,9 +12,9 @@ interface CreateUserProps {
 export interface UserEntity extends CreateUserProps {
   avatarUrl?: string
   description?: string
-  createdAt: string
-  updatedAt: string
-  lastSessionAt?: string
+  createdAt: number
+  updatedAt: number
+  lastSessionAt?: number
 }
 
 const createUser = ({
