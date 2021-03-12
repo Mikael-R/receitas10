@@ -10,8 +10,9 @@
             class="input-search"
             type="text"
             placeholder="Encontre uma receita..."
+            :disabled="desabilitar ? disabled : '' "
           />
-          <button class="btn-search">
+          <button class="btn-search" :disabled="desabilitar ? disabled : ''">
             <img src="../assets/img/search.png" alt="icon-search" />
           </button>
         </div>
@@ -29,6 +30,7 @@
 
 <script>
 export default {
+  props: ['desabilitar'],
   methods: {
     perfil() {
       this.$router.push("perfil");
@@ -113,5 +115,13 @@ group-search {
 }
 .input-search:hover .btn-search:hover {
   border-color: rgba(198, 40, 40, 0.5);
+}
+.input-search:disabled{
+  background: #ccc;
+  cursor: not-allowed;
+}
+.btn-search:disabled{
+  background: #ccc;
+  cursor: not-allowed;
 }
 </style>

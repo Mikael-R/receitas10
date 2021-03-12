@@ -1,6 +1,6 @@
 <template>
   <div style="backgroud: #ffefc0">
-    <Nav/>
+    <Nav desabilitar="false"/>
     <div class="container">
       <div class="row">
         <div class="col">
@@ -22,6 +22,11 @@ import Nav from '../components/Nav'
 export default {
   components:{
     Nav
+  },
+  data: () => {
+    return {
+      desabilitar:false,
+    }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav />
+    <Nav desabilitar="true" />
     <div class="container">
       <div class="row marginTop">
         <div class="col">
@@ -52,6 +52,7 @@ export default {
     return {
       user: {
         name: "Iguinho Bariloche",
+        desabilitar:true,
       },
     };
   },
