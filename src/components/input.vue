@@ -15,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .input {
   background: #fff8ea;
   border: 1px solid rgba(0, 0, 0, 0.3);
