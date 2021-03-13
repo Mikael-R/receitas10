@@ -183,6 +183,7 @@ export default {
 <style scoped>
 .main {
   background-color: #fcf5e0;
+  overflow-y: hidden;
 }
 .title {
   margin-top: 30px;
@@ -217,9 +218,16 @@ export default {
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
+  border-radius: 8px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   margin-left: -4px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.input:focus,
+.input:active,
+.input:hover {
+  border: 1px solid #4E6F81;
+  outline: 0;
 }
 .button {
   width: 190px;
