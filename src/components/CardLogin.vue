@@ -1,30 +1,46 @@
 <template>
   <form class="card animeLeft" @submit="handleSubmit">
-    <input type="email" class="input form-control" placeholder="E-mail" required />
-    <input type="password" class="input form-control" placeholder="Senha" required />
-    <button class="btn-entrar">Entrar</button>
-    <router-link class="esqueci" to="/cadastro">Esqueceu sua senha?</router-link>
-    <span class="hr"></span>
-    <button class="btn-criar" type="submit">Criar conta</button>
+    <input
+      type="email"
+      class="input form-control"
+      placeholder="E-mail"
+      required
+    />
+    <input
+      type="password"
+      class="input form-control"
+      placeholder="Senha"
+      required
+    />
+    <button class="btn-entrar" type="submit">Entrar</button>
+    <router-link class="esqueci" to="/cadastro"
+      >Esqueceu sua senha?</router-link
+    >
+    <hr class="hr">
+    <button
+      class="btn-criar"
+      type="button"
+      @click="() => this.$router.push('cadastro')"
+    >
+      Criar conta
+    </button>
   </form>
 </template>
 
 <script>
 export default {
-  methods:{
+  methods: {
     handleSubmit(e) {
-      const invalidEmailOrPassword = true
+      const invalidEmailOrPassword = true;
       if (invalidEmailOrPassword) {
-        e.preventDefault()
-         this.$alertify.error("Email ou senha inválidos!");
-        return
+        e.preventDefault();
+        this.$alertify.error("Email ou senha inválidos!");
+        return;
       }
-      this.$router.push('cadastro')
-    }
-  }
+      this.$router.push("cadastro");
+    },
+  },
 };
-
-
 </script>
 
 <style scoped>
@@ -37,6 +53,12 @@ export default {
   width: 180px;
   height: 55px;
   margin: 23px 11rem 16px 11rem;
+  font-size: 22px;
+  font-family: Roboto;
+}
+.btn-criar:hover,
+.btn-criar:focus {
+  border: 1px solid #f5cb4c;
 }
 .hr {
   border: 1px solid rgba(0, 0, 0, 0.3);
