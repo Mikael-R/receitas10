@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav :desabilitar="desabilitar"/>
+    <Nav :desabilitar="desabilitar" />
     <div class="container">
       <div class="row marginTop">
         <div class="col">
@@ -48,12 +48,12 @@ export default {
   components: {
     Nav,
   },
-  data: function () {
+  data: function() {
     return {
       user: {
         name: "Iguinho Bariloche",
       },
-      desabilitar:true,
+      desabilitar: true,
     };
   },
 };
@@ -71,6 +71,7 @@ export default {
   background: #e3d8b4;
   border-radius: 8px 8px 8px 8px;
   margin-left: 15px;
+  margin-top: 15px;
 }
 .card-receita-img {
 }
