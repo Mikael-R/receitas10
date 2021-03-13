@@ -7,12 +7,23 @@
       <div class="wrap">
         <div class="group-search">
           <input
+          v-if="desabilitar"
             class="input-search"
             type="text"
             placeholder="Encontre uma receita..."
-            :disabled="desabilitar ? disabled : '' "
+            disabled="disabled"
           />
-          <button class="btn-search" :disabled="desabilitar ? disabled : ''">
+          <input
+          v-if="!desabilitar"
+            class="input-search"
+            type="text"
+            placeholder="Encontre uma receita..."
+            
+          />
+          <button v-if="desabilitar" class="btn-search" disabled=" disabled">
+            <img src="../assets/img/search.png" alt="icon-search" />
+          </button>
+          <button v-if="!desabilitar" class="btn-search" >
             <img src="../assets/img/search.png" alt="icon-search" />
           </button>
         </div>
@@ -30,7 +41,9 @@
 
 <script>
 export default {
-  props: ['desabilitar'],
+  props: {
+    desabilitar: Boolean
+  },
   methods: {
     perfil() {
       this.$router.push("perfil");

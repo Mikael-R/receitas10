@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Nav desabilitar="true" />
+    <Nav :desabilitar="desabilitar"/>
     <div class="container">
       <div class="row marginTop">
         <div class="col">
@@ -52,8 +52,8 @@ export default {
     return {
       user: {
         name: "Iguinho Bariloche",
-        desabilitar:true,
       },
+      desabilitar:true,
     };
   },
 };

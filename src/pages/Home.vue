@@ -1,6 +1,6 @@
 <template>
   <div style="backgroud: #ffefc0">
-    <Nav desabilitar="false"/>
+    <Nav :desabilitar="desabilitar"/>
     <div class="container">
       <div class="row">
         <div class="col">
