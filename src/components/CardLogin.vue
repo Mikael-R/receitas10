@@ -1,18 +1,24 @@
 <template>
-  <div class="card animeLeft">
-    <input type="text" class="input form-control" placeholder="E-mail" />
-    <input type="password" class="input form-control" placeholder="Senha" />
-    <button class="entrar">Entrar</button>
+  <form class="card animeLeft" @submit="handleSubmit">
+    <input type="email" class="input form-control" placeholder="E-mail" required />
+    <input type="password" class="input form-control" placeholder="Senha" required />
+    <button class="btn-entrar">Entrar</button>
     <router-link class="esqueci" to="/cadastro">Esqueceu sua senha?</router-link>
     <span class="hr"></span>
-    <button class="btn-criar" @click="cadastrar()">Criar conta</button>
-  </div>
+    <button class="btn-criar" type="submit">Criar conta</button>
+  </form>
 </template>
 
 <script>
 export default {
   methods:{
-    cadastrar(){
+    handleSubmit(e) {
+      const invalidEmailOrPassword = true
+      if (invalidEmailOrPassword) {
+        e.preventDefault()
+         this.$alertify.error("Email ou senha inválidos!");
+        return
+      }
       this.$router.push('cadastro')
     }
   }
@@ -56,13 +62,13 @@ export default {
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
   border-radius: 8px;
-  padding: 26px;
+  padding: 10px;
   margin: 16px 10px;
   font-size: 20px;
   line-height: 23px;
   width: 32rem;
 }
-.entrar {
+.btn-entrar {
   height: 55px;
   left: 790px;
   top: 383px;
@@ -77,18 +83,8 @@ export default {
   line-height: 26px;
   margin: 9px 10px 12px 10px;
 }
-.input:focus,
-.input:active,
-.input:hover {
-  border: 1px solid #4E6F81;
+.btn-entrar:hover,
+.btn-entrar:focus {
+  border: 1px solid #9cd0ec;
 }
-.btn-criar:hover,
-.btn-criar:focus{
-border: 1px solid #F5CB4C;
-}
-.entrar:hover,
-.entrar:focus{
-border: 1px solid #F5CB4C;
-}
-
 </style>
