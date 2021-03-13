@@ -65,7 +65,7 @@ export default {
 };
 </script>
 
-<style>
+<style scooped>
 .home:hover {
   cursor: pointer;
 }
