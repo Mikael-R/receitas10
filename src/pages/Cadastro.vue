@@ -3,20 +3,22 @@
     <div class="row align animeLeft">
       <div class="card" v-if="!registered">
         <h2 class="title">Ter a sua conta</h2>
-        <span class="subtitle">É rápido e facil</span>
+        <span class="subtitle">É rápido e fácil</span>
         <hr class="hr" />
-        <form>
+        <form @submit="handleSubmit">
           <input
             class="input"
             type="text"
             placeholder="Seu nome"
             v-model="name"
+            required
           />
           <input
             class="input"
             type="text"
             placeholder="Seu username"
             v-model="username"
+            required
           />
           <img
             class="img"
@@ -29,6 +31,7 @@
             type="email"
             placeholder="Email"
             v-model="email"
+            required
           />
           <img
             class="img"
@@ -41,8 +44,9 @@
             type="password"
             placeholder="Senha"
             v-model="password"
+            required
           />
-          <Button type="submit" textoButton="Criar conta" @enviar="submit()" />
+          <button class="btn-criar" type="submit">Criar conta</button>
         </form>
       </div>
       <div class="card-concluido" v-if="registered">
@@ -53,18 +57,16 @@
           <br />
           Comece agora a participar dessa comunidade cheia de sabores!
         </p>
-        <button class="button" @click="voltar()">Voltar ao início</button>
+        <button class="button" @click="() => this.$router.push('login')">
+          Voltar ao início
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Button from "../components/Button";
 export default {
-  components: {
-    Button,
-  },
   data() {
     return {
       name: "",
@@ -77,38 +79,27 @@ export default {
     };
   },
   methods: {
-    submit() {
+    handleSubmit(e) {
       this.showUsernameCheck = false;
       this.showEmailCheck = false;
 
       const usernameAlredyUsed = false;
       const emailAlredyUsed = false;
 
-      if (
-        this.name === "" ||
-        this.username === "" ||
-        this.email === "" ||
-        this.password === ""
-      ) {
-        this.$alertify.error("Preencha todos os campos!");
-        return;
-      }
-
       if (usernameAlredyUsed) {
         this.showUsernameCheck = true;
         this.$alertify.error("Este username já está em uso!");
+        e.preventDefault();
         return;
       }
       if (emailAlredyUsed) {
         this.showEmailCheck = true;
         this.$alertify.error("Este email já está em uso!");
+        e.preventDefault();
         return;
       }
 
       this.registered = true;
-    },
-    voltar() {
-      this.$router.push("login");
     },
   },
 };
@@ -131,6 +122,27 @@ export default {
   height: 50px;
   margin-left: auto;
   display: block;
+}
+.btn-criar {
+  background: #f5cb4c;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 8px;
+  color: #fff8ea;
+  width: 180px;
+  height: 55px;
+  margin: 23px 120px 16px 120px;
+  font-size: 22px;
+  font-family: Roboto;
+}
+.btn-criar:hover,
+.btn-criar:focus,
+.button:hover,
+.button:focus {
+  border: 1px solid #f5cb4c;
+}
+ {
+  border: 1px solid #f5cb4c;
 }
 .img {
   width: 25px;
