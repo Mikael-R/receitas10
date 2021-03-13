@@ -34,7 +34,14 @@ export interface RecipeEntity {
     | 'tortas'
     | string
   ingredients: string
-  servings: 'até 2' | 'até 4' | 'até 6' | 'até 10' | 'mais de 10' | string
+  servings:
+    | 'até 2'
+    | 'até 4'
+    | 'até 6'
+    | 'até 8'
+    | 'até 10'
+    | 'mais de 10'
+    | string
   difficulty: 'fácil' | 'médio' | 'difícil' | string
   howPrepare: string
   demoImages?: string
