@@ -3,7 +3,7 @@
     <input type="text" class="input form-control" placeholder="E-mail" />
     <input type="password" class="input form-control" placeholder="Senha" />
     <button class="entrar">Entrar</button>
-    <router-link class="esqueci" to="esqueceu-senha">Esqueceu sua senha?</router-link>
+    <router-link class="esqueci" to="/cadastro">Esqueceu sua senha?</router-link>
     <span class="hr"></span>
     <button class="btn-criar" @click="cadastrar()">Criar conta</button>
   </div>
