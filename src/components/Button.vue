@@ -8,7 +8,7 @@ props: ['textoButton'],
 }
 </script>
 
-<style>
+<style scoped>
 .btn-criar {
   background: #f5cb4c;
   border: 1px solid rgba(0, 0, 0, 0.3);
