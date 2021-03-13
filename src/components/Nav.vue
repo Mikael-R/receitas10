@@ -2,38 +2,45 @@
   <div>
     <div class="nav-receitas">
       <div class="home">
-        <img src="../assets/img/logoNav.png" alt="logo" @click="home()">
+        <img src="../assets/img/logoNav.png" alt="logo" @click="home()" />
       </div>
       <div class="wrap">
         <div class="group-search">
           <input
-          v-if="desabilitar"
+            v-if="desabilitar"
             class="input-search"
             type="text"
             placeholder="Encontre uma receita..."
             disabled="disabled"
           />
           <input
-          v-if="!desabilitar"
+            v-if="!desabilitar"
             class="input-search"
             type="text"
             placeholder="Encontre uma receita..."
-            
           />
           <button v-if="desabilitar" class="btn-search" disabled=" disabled">
             <img src="../assets/img/search.png" alt="icon-search" />
           </button>
-          <button v-if="!desabilitar" class="btn-search" >
+          <button v-if="!desabilitar" class="btn-search">
             <img src="../assets/img/search.png" alt="icon-search" />
           </button>
         </div>
       </div>
       <div class="enviar">
-        <img src="../assets/img/shopping-list.png" alt="icon-shopping" />
-        <span>ENVIE SUA RECEITA</span>
+        <img
+          @click="enviarReceita()"
+          src="../assets/img/shopping-list.png"
+          alt="icon-shopping"
+        />
+        <span @click="enviarReceita()">ENVIE SUA RECEITA</span>
       </div>
       <div class="img">
-        <img src="../assets/img/blanck.png" alt="foto perfil" @click="perfil()">
+        <img
+          src="../assets/img/blanck.png"
+          alt="foto perfil"
+          @click="perfil()"
+        />
       </div>
     </div>
   </div>
@@ -42,7 +49,7 @@
 <script>
 export default {
   props: {
-    desabilitar: Boolean
+    desabilitar: Boolean,
   },
   methods: {
     perfil() {
@@ -50,7 +57,10 @@ export default {
     },
     home() {
       this.$router.push("/");
-    }
+    },
+    enviarReceita() {
+      this.$router.push("enviar-receita");
+    },
   },
 };
 </script>
@@ -68,7 +78,7 @@ export default {
 .img:hover {
   cursor: pointer;
 }
-.img img{
+.img img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -129,11 +139,11 @@ group-search {
 .input-search:hover .btn-search:hover {
   border-color: rgba(198, 40, 40, 0.5);
 }
-.input-search:disabled{
+.input-search:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
-.btn-search:disabled{
+.btn-search:disabled {
   background: #ccc;
   cursor: not-allowed;
 }
