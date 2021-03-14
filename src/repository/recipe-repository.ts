@@ -5,6 +5,8 @@ import pagination from '../tools/pagination'
 export interface RecipeEntity {
   id: string
   authorId: string
+  authorUsername: string
+  authorName: string
   name: string
   preparationTime:
     | 'rápido'
@@ -54,6 +56,8 @@ export interface RecipeEntity {
 interface CreateRecipeProps {
   id: string
   authorId: string
+  authorUsername: string
+  authorName: string
   name: string
   preparationTime: string
   category: string
@@ -87,6 +91,8 @@ interface UpdateRecipeProps {
 const createRecipe = ({
   id,
   authorId,
+  authorUsername,
+  authorName,
   name,
   preparationTime,
   category,
@@ -100,6 +106,8 @@ const createRecipe = ({
   knex<RecipeEntity>('recipes').insert({
     id,
     authorId,
+    authorUsername,
+    authorName,
     name,
     preparationTime,
     category,

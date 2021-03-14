@@ -155,7 +155,7 @@ class RecipeController {
         message: 'Parâmetros informados não são strings',
       })
 
-    const authorId = req.userId
+    const user = await userRepository.findById(req.userId)
     const recipe = await recipeRepository.findByAuthorIdAndName(authorId, name)
     if (recipe)
       return res.status(409).json({
@@ -163,14 +163,16 @@ class RecipeController {
         message: 'Nome da receita já está em uso por este usuário',
         recipe: {
           id: recipe.id,
-          authorId,
+          authorId: user.id,
         },
       })
 
     const recipeId = uuidv4()
     await recipeRepository.createRecipe({
       id: recipeId,
-      authorId,
+      authorId: user.id,
+      authorUsername: user.username,
+      authorName: user.name,
       name,
       preparationTime,
       category,
@@ -187,7 +189,7 @@ class RecipeController {
       message: 'Receita criada com sucesso',
       recipe: {
         id: recipeId,
-        authorId,
+        authorId: user.id,
       },
     })
   }

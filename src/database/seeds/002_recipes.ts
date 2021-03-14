@@ -6,6 +6,8 @@ const recipes: RecipeEntity[] = [
   {
     id: '75fed72a-8742-4a25-97ea-e69542fc7de2',
     authorId: '06cfd544-6205-48a4-9b6a-a24eff360233',
+    authorUsername: 'ratinho',
+    authorName: 'Ratatui',
     name: 'macarrão-com-molho',
     category: 'massas',
     difficulty: 'fácil',
@@ -33,6 +35,8 @@ MOLHO:
   {
     id: '87c2d8cd-4f35-4ded-bfd3-b424dd532cfe',
     authorId: '5d7f0e48-9b1f-4f96-94ca-90d8a1c23e12',
+    authorUsername: 'bobesponja',
+    authorName: 'Bob Esponja',
     name: 'hambúrguer-de-siri',
     category: 'prato principal',
     difficulty: 'fácil',
@@ -69,6 +73,8 @@ Servir imediatamente.`,
   {
     id: 'a206be70-a234-43fa-8f8e-17fe1f1c70c3',
     authorId: '31ffb9b1-818f-4727-b323-bcd1153e287f',
+    authorUsername: 'anastacia',
+    authorName: 'Tia Anastácia',
     name: 'bolinho-de-chuva',
     category: 'bolos',
     difficulty: 'médio',
@@ -93,6 +99,8 @@ Coloque os bolinhos sobre papel absorvente e depois passe-os no açúcar com can
   {
     id: '1d5f80e1-d654-4326-bb5c-0553bdb8b584',
     authorId: '651659a4-5dfa-462f-a17d-67359b635079',
+    authorUsername: 'florinda',
+    authorName: 'Dona Florinda',
     name: 'churros',
     category: 'doces e sobremesas',
     difficulty: 'médio',
