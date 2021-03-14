@@ -1,11 +1,16 @@
 <template>
   <div>
-    <Nav :desabilitar="desabilitar" />
+    <Nav :desabilitar="true" />
     <div class="container">
       <div class="row marginTop">
         <div class="col">
-          <img src="../assets/img/blanck.png" alt="foto perfil" />
-          <span>{{ user.name }}</span>
+          <img class="avatar" :src="user.avatarUrl" alt="foto perfil" />
+          <span class="nome">{{ user.name }}</span>
+        </div>
+      </div>
+      <div class="row marginTop">
+        <div class="col">
+          <span class="description">{{ user.description }}</span>
         </div>
       </div>
       <div class="row marginTop">
@@ -13,7 +18,7 @@
           <h2>Atividades</h2>
         </div> -->
         <div class="col">
-          <h2>Minhas receitas</h2>
+          <h2>Receitas</h2>
         </div>
       </div>
       <div class="row">
@@ -27,14 +32,38 @@
             <span>Curtiu a receita de Tortas de Elefante de Junior Tavares</span>
           </div>
         </div> -->
-        <div class="card-receita">
+        <div
+          class="card-receita"
+          v-bind:key="recipe.id"
+          v-for="recipe in recipes"
+        >
           <div>
-            <img src="../assets/img/bolo.png" alt="foto receita" />
+            <img
+              class="card-receita-img"
+              :src="recipe.demoImages"
+              alt="foto da receita"
+            />
           </div>
           <div class="texto">
-            <span class="card-receita-title">Bolo de Marijuanna</span>
-            <span class="card-receita-categoria"> Bolos e tortas </span>
-            <span class="card-receita-data"> Postado em: 13/12/2020 </span>
+            <router-link
+              class="card-receita-title"
+              :to="`/receita/${recipe.authorUsername}/${recipe.name}`"
+            >
+              {{
+                recipe.name
+                  .split("-")
+                  .join(" ")
+                  .toLowerCase()
+                  .replace(/(?:^|\s)\S/g, (w) => w.toUpperCase())
+              }}
+            </router-link>
+            <span class="card-receita-categoria">{{
+              recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1)
+            }}</span>
+            <span class="card-receita-data">
+              Publicado em:
+              {{ new Date(recipe.createdAt).toLocaleDateString() }}
+            </span>
           </div>
         </div>
       </div>
@@ -44,17 +73,24 @@
 
 <script>
 import Nav from "../components/Nav";
+import usersService from "../services/users.js";
+import recipesService from "../services/recipes.js";
 export default {
   components: {
     Nav,
   },
   data: function() {
     return {
-      user: {
-        name: "Iguinho Bariloche",
-      },
-      desabilitar: true,
+      user: {},
+      recipes: [],
     };
+  },
+  async beforeMount() {
+    const { username } = this.$route.params;
+    const { user } = (await usersService.userInfo(username)).data;
+    const { recipes } = (await recipesService.userRecipes(username)).data;
+    this.user = user;
+    this.recipes = recipes;
   },
 };
 </script>
@@ -74,12 +110,16 @@ export default {
   margin-top: 15px;
 }
 .card-receita-img {
+  width: 128px;
+  height: 125px;
+  border-radius: 8px;
 }
 .card-receita-title {
   margin: 16px 26px 0 26px;
   font-size: 15px;
   line-height: 22px;
-  color: #000000;
+  font-style: normal;
+  font-weight: 600;
 }
 .card-receita-data {
   display: flex;
@@ -87,19 +127,20 @@ export default {
   font-family: Poppins;
   font-style: normal;
   font-weight: normal;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 15px;
-  margin-top: 11px;
+  margin-top: 18px;
 }
 .card-receita-categoria {
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
-  font-size: 10px;
+  font-size: 12px;
   line-height: 15px;
   color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
+  margin-top: 18px;
 }
 .ml {
   margin-left: 18rem;
@@ -140,7 +181,7 @@ export default {
   display: flex;
   align-items: center;
 }
-.marginTop .col span {
+.marginTop .col .nome {
   margin-left: 14px;
   color: #c62828;
   font-family: Poppins;
@@ -151,5 +192,11 @@ export default {
 }
 .marginTop .col img {
   border-radius: 50%;
+}
+.avatar {
+  width: 70px;
+  height: 70px;
+}
+.description {
 }
 </style>
