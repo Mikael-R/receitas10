@@ -64,7 +64,7 @@ export default new Router({
       path: "/enviar-receita",
       component: EnviarReceita,
     },
-    { name: "perfil", path: "/perfil", component: Perfil },
-    { name: "receita", path: "/receita", component: Receita }
+    { name: "perfil", path: "/perfil/:username", component: Perfil },
+    { name: "receita", path: "/receita/:username/:recipeName", component: Receita }
   ],
 });

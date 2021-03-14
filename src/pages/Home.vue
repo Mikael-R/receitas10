@@ -1,38 +1,108 @@
 <template>
   <div style="backgroud: #ffefc0">
-    <Nav :desabilitar="desabilitar"/>
+    <Nav :desabilitar="false" />
     <div class="container">
       <div class="row">
         <div class="col">
-          <div class="card-receita" @click="visualizarReceita()">
-            <img src="../assets/img/hamburger.png" alt="" />
-            <span class="card-title">Hamburger de Siri</span>
-            <span class="card-subtitle">Sanduiches</span>
-            <span class="card-subtitle">Por: <a href="#">Bob Esponja</a></span>
-            <span class="card-subtitle" style="margin-bottom:10px">Publicado em: 14/01/2021</span>
+          <div
+            class="card-receita"
+            v-bind:key="recipe.id"
+            v-for="recipe in recipes.column1"
+          >
+            <img :src="recipe.demoImages" alt="Foto da receita" />
+            <router-link
+              class="card-title"
+              :to="`/receita/${recipe.authorUsername}/${recipe.name}`"
+            >
+              {{
+                recipe.name
+                  .split("-")
+                  .join(" ")
+                  .toLowerCase()
+                  .replace(/(?:^|\s)\S/g, (w) => w.toUpperCase())
+              }}
+            </router-link>
+            <span class="card-subtitle">{{
+              recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1)
+            }}</span>
+            <span class="card-subtitle">
+              Por:
+              <router-link :to="`/perfil/${recipe.authorUsername}`">
+                {{ recipe.authorName }}
+              </router-link>
+            </span>
+            <span class="card-subtitle" style="margin-bottom:10px">
+              Publicado em:
+              {{ new Date(recipe.createdAt).toLocaleDateString() }}
+            </span>
+          </div>
+        </div>
+
+        <div class="col">
+          <div
+            class="card-receita"
+            v-bind:key="recipe.id"
+            v-for="recipe in recipes.column2"
+          >
+            <img :src="recipe.demoImages" alt="Foto da receita" />
+            <router-link
+              class="card-title"
+              :to="`/receita/${recipe.authorUsername}/${recipe.name}`"
+            >
+              {{
+                recipe.name
+                  .split("-")
+                  .join(" ")
+                  .toLowerCase()
+                  .replace(/(?:^|\s)\S/g, (w) => w.toUpperCase())
+              }}
+            </router-link>
+            <span class="card-subtitle">{{
+              recipe.category.charAt(0).toUpperCase() + recipe.category.slice(1)
+            }}</span>
+            <span class="card-subtitle">
+              Por:
+              <router-link to="/perfil">
+                {{ recipe.authorName }}
+              </router-link>
+            </span>
+            <span class="card-subtitle" style="margin-bottom:10px">
+              Publicado em:
+              {{ new Date(recipe.createdAt).toLocaleDateString() }}
+            </span>
           </div>
         </div>
       </div>
     </div>
+    <hr/>
   </div>
 </template>
 
 <script>
-import Nav from '../components/Nav'
+import Nav from "../components/Nav";
+import recipes from "../services/recipes";
 export default {
-  components:{
-    Nav 
+  components: {
+    Nav,
   },
   data: () => {
     return {
-      desabilitar:false,
-    }
+      recipes: {
+        column1: [],
+        column2: [],
+      },
+      errored: false,
+      loading: true,
+    };
   },
-  methods: {
-    visualizarReceita() {
-      this.$router.push("receita");
-    }
-  }
+  async beforeMount() {
+    const { data } = await recipes.listRandom(1); // 1 = pagina
+    data.recipes.forEach((v, i) => {
+      if (i < 4) this.recipes.column1.push(v);
+      if (i > 4 && i <= 8) this.recipes.column2.push(v);
+    });
+  },
+  methods: {},
 };
 </script>
 
@@ -50,6 +120,8 @@ export default {
   border-radius: 8px;
 }
 .card-receita img {
+  width: 280px;
+  height: 180px;
   position: relative;
   border-radius: 8px 8px 0 0;
   margin-bottom: 20px;
@@ -61,17 +133,15 @@ export default {
   font-weight: 600;
   font-size: 18px;
 }
-.card-subtitle{
+.card-subtitle {
   font-family: Poppins;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 18px;
-  margin-bottom:11px
+  margin-bottom: 11px;
 }
-.container-grid {
-  display: grid;
-  grid-template-columns: 40px auto auto 50px 40px;
+.container {
+  overflow-y: hidden;
 }
-
 </style>

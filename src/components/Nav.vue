@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="nav-receitas">
-      <div class="home">
-        <img src="../assets/img/logoNav.png" alt="logo" @click="home()" />
-      </div>
+      <router-link class="home" to="/">
+        <img src="../assets/img/logoNav.png" alt="logo"/>
+      </router-link>
       <div class="wrap">
         <div class="group-search">
           <input
@@ -29,19 +29,18 @@
       </div>
       <div class="enviar">
         <img
-          @click="enviarReceita()"
           src="../assets/img/shopping-list.png"
           alt="icon-shopping"
+          @click="() => this.$router.replace('/enviar-receita')"
         />
-        <span @click="enviarReceita()">ENVIE SUA RECEITA</span>
+        <router-link class="link" to="/enviar-receita">ENVIE SUA RECEITA</router-link>
       </div>
-      <div class="img">
+      <router-link class="img" :to="`/perfil/${username}`">
         <img
-          src="../assets/img/blanck.png"
-          alt="foto perfil"
-          @click="perfil()"
+          :src="avatarUrl"
+          alt="foto de perfil"
         />
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
@@ -51,18 +50,17 @@ export default {
   props: {
     desabilitar: Boolean,
   },
-  methods: {
-    perfil() {
-      this.$router.push("perfil");
-    },
-    home() {
-      this.$router.push("/");
-    },
-    enviarReceita() {
-      this.$router.push("enviar-receita");
-    },
+  data() {
+    return {
+      username: '',
+      avatarUrl: '',
+    }
   },
-};
+  async beforeMount() {
+    this.username = localStorage.username
+    this.avatarUrl = localStorage.avatarUrl
+  },
+}
 </script>
 
 <style scooped>
@@ -72,7 +70,7 @@ export default {
 .wrap:hover {
   cursor: pointer;
 }
-.enviar:hover {
+.enviar img:hover {
   cursor: pointer;
 }
 .img:hover {
@@ -146,5 +144,11 @@ group-search {
 .btn-search:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+.link {
+  color: #C62828;
+}
+.link:hover {
+  color: #C62828;
 }
 </style>
