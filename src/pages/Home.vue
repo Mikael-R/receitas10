@@ -4,13 +4,13 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <button class="card-receita" @click="visualizarReceita()">
+          <div class="card-receita" @click="visualizarReceita()">
             <img src="../assets/img/hamburger.png" alt="" />
             <span class="card-title">Hamburger de Siri</span>
             <span class="card-subtitle">Sanduiches</span>
             <span class="card-subtitle">Por: <a href="#">Bob Esponja</a></span>
             <span class="card-subtitle" style="margin-bottom:10px">Publicado em: 14/01/2021</span>
-          </button>
+          </div>
         </div>
       </div>
     </div>
