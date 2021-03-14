@@ -1,5 +1,6 @@
 import 'dotenv/config'
 import express from 'express'
+import morgan from 'morgan'
 
 import './database/connection'
 import routes from './routes'
@@ -8,6 +9,7 @@ const app = express()
 const port = process.env.PORT || 3333
 
 app.use(express.json())
+app.use(morgan('dev'))
 app.use(routes)
 
 app.use((req, res, next) => {
