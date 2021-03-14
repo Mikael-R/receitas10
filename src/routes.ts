@@ -20,6 +20,7 @@ routes.post('/users', UserController.store)
 routes.delete('/users/:username', authMiddleware, UserController.destroy)
 
 routes.post('/sessions', SessionController.store)
+routes.post('/sessions/valid', authMiddleware, SessionController.isValid)
 
 routes.get('/recipes/search', RecipeController.index)
 routes.get('/recipes/random', RecipeController.indexRandom)

@@ -63,6 +63,26 @@ const deleteWithRecipesById = async (id: string) => {
   await knex('recipes').where('authorId', id).delete()
 }
 
+const isValid = async ({
+  id,
+  name,
+  username,
+  email,
+}: {
+  id: string
+  name: string
+  username: string
+  email: string
+}) =>
+  !!(
+    await knex<UserEntity>('users')
+      .where({ id })
+      .where({ name })
+      .where({ username })
+      .where({ email })
+      .first()
+  )?.id
+
 export default {
   createUser,
   existsEmail,
@@ -73,4 +93,5 @@ export default {
   updateUserLastSessionDate,
   updateUserToken,
   deleteWithRecipesById,
+  isValid,
 }

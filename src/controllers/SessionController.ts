@@ -53,6 +53,23 @@ class SessionController {
       },
     })
   }
+
+  async isValid(req: Request, res: Response) {
+    const { id, name, username, email } = req.body
+
+    const isValid = await userRepository.isValid({
+      id,
+      name,
+      username,
+      email,
+    })
+
+    return res.json({
+      error: false,
+      message: isValid ? 'Usuário válido' : 'Usuário inválido',
+      user: { isValid },
+    })
+  }
 }
 
 export default new SessionController()
