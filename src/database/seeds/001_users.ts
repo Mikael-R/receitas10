@@ -31,7 +31,7 @@ const users: UserEntity[] = [
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZDdmMGU0OC05YjFmLTRmOTYtOTRjYS05MGQ4YTFjMjNlMTIiLCJpYXQiOjE2MTU0ODg0ODksImV4cCI6MTYxNjA5MzI4OX0.Sfs2Qi2USzTGLlgThVDDBxkPTnzMn0bsdGKrKiNKv3k',
     avatarUrl:
-      'https://i.pinimg.com/originals/ad/d7/eb/add7eb1e0963fd7e9427a6a8fb1a7cc7.jpg',
+      'https://i.pinimg.com/564x/09/54/f0/0954f04b1b5ac07a3dc1a7d3dbde73ab.jpg',
     createdAt: new Date().getTime(),
     updatedAt: new Date().getTime(),
     description:
@@ -65,7 +65,7 @@ const users: UserEntity[] = [
     token:
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NTE2NTlhNC01ZGZhLTQ2MmYtYTE3ZC02NzM1OWI2MzUwNzkiLCJpYXQiOjE2MTU1NDc4ODIsImV4cCI6MTYxNjE1MjY4Mn0.jWqYDRjVlUchS16EmUFEkwsghQubGyam5D5Vq3-3h64',
     avatarUrl:
-      'https://i.pinimg.com/originals/3a/e3/bd/3ae3bd8abffdd9f15f98caa57806cfe4.jpg',
+      'https://i.pinimg.com/564x/8e/66/cc/8e66cce1924111a50dd4759c795951b4.jpg',
     createdAt: new Date().getTime(),
     updatedAt: new Date().getTime(),
     description: 'Gostaria de entrar e tomar uma xícara de café?',
