@@ -62,7 +62,7 @@ class UserController {
         .json({ error: true, message: 'Usuário não encontrado' })
     }
 
-    res.status(302).json({
+    res.status(200).json({
       error: false,
       message: 'Usuário encontrado',
       user: {

@@ -50,7 +50,7 @@ class RecipeController {
       page
     )
     return res
-      .status(302)
+      .status(200)
       .header('X-Total-Count', count)
       .json({ error: false, message: 'Receitas encontradas', recipes })
   }
@@ -61,7 +61,7 @@ class RecipeController {
     const { count, recipes } = await recipeRepository.searchRandom(page)
 
     return res
-      .status(302)
+      .status(200)
       .header('X-Total-Count', count)
       .json({ error: false, message: 'Receitas encontradas', recipes })
   }
@@ -83,7 +83,7 @@ class RecipeController {
     )
 
     return res
-      .status(302)
+      .status(200)
       .header('X-Total-Count', count)
       .json({ error: false, message: 'Receitas encontradas', recipes })
   }
@@ -109,7 +109,7 @@ class RecipeController {
     }
 
     return res
-      .status(302)
+      .status(200)
       .json({ error: false, message: 'Receita encontrada', recipe })
   }
 

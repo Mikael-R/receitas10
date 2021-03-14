@@ -37,7 +37,7 @@ class SessionController {
 
     await userRepository.updateUserLastSessionDate(user.id)
 
-    return res.status(302).json({
+    return res.status(200).json({
       error: false,
       message: 'Usuário encontrado',
       user: {
