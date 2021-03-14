@@ -8,6 +8,8 @@ import Cadastro from "./pages/Cadastro.vue";
 // import EsqueceuSenha from "./pages/EsqueceuSenha.vue";
 import Perfil from "./pages/Perfil.vue";
 import EnviarReceita from "./pages/EnviarReceita.vue";
+import Receita from "./pages/VisualizarReceita.vue";
+
 
 Vue.use(Router);
 Vue.use(VueAlertify, {
@@ -63,5 +65,6 @@ export default new Router({
       component: EnviarReceita,
     },
     { name: "perfil", path: "/perfil", component: Perfil },
+    { name: "receita", path: "/receita", component: Receita }
   ],
 });

@@ -4,13 +4,13 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <div class="card-receita">
+          <button class="card-receita" @click="visualizarReceita()">
             <img src="../assets/img/hamburger.png" alt="" />
             <span class="card-title">Hamburger de Siri</span>
             <span class="card-subtitle">Sanduiches</span>
             <span class="card-subtitle">Por: <a href="#">Bob Esponja</a></span>
             <span class="card-subtitle" style="margin-bottom:10px">Publicado em: 14/01/2021</span>
-          </div>
+          </button>
         </div>
       </div>
     </div>
@@ -21,11 +21,16 @@
 import Nav from '../components/Nav'
 export default {
   components:{
-    Nav
+    Nav 
   },
   data: () => {
     return {
       desabilitar:false,
+    }
+  },
+  methods: {
+    visualizarReceita() {
+      this.$router.push("receita");
     }
   }
 };
@@ -52,18 +57,17 @@ export default {
 .card-title {
   margin-top: 10px;
   font-family: Poppins;
-font-style: normal;
-font-weight: 600;
-font-size: 18px;
-
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
 }
 .card-subtitle{
   font-family: Poppins;
-font-style: normal;
-font-weight: 500;
-font-size: 12px;
-line-height: 18px;
-margin-bottom:11px
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom:11px
 }
 .container-grid {
   display: grid;
