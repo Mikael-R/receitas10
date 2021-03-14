@@ -4,6 +4,8 @@ export async function up(knex: Knex): Promise<void> {
   return knex.schema.createTable('recipes', function (table) {
     table.uuid('id').primary().notNullable().unique()
     table.uuid('authorId').notNullable()
+    table.string('authorUsername', 12).notNullable().unique()
+    table.string('authorName').notNullable()
     table.string('name').notNullable()
     table.string('preparationTime').notNullable()
     table.string('category').notNullable()
