@@ -11,12 +11,12 @@
 
 <h4 align="center">🚧 receitas 10 em desenvolvimento... 🚧</h4>
 
-> Um site de uma comunidade de receitas cheia de sabores
+> Um site de uma comunidade de receitas cheia de sabores 😋
 
 <details>
 <summary>Screenshots</summary>
 
-<img src=".github/demo1.png" width="240" alt="screenshot0">
+<img src=".github/demo1.png" width="240" alt="screenshot0"><br>
 <img src=".github/demo2.png" width="240" alt="screenshot1">
 </details>
 
@@ -24,9 +24,10 @@
 
 - 🤔 [Como utilizar](#como-usar)
 - 🚀 [Tecnologias](#tecnologias)
-- 🌱 [Minimal Requirements](#requisitos-minimos)
+- 🌱 [Minimal Requirements](#requisitos-mínimos)
+- 📐 [Layout no figma](https://www.figma.com/file/nBYTZeTBwMGNP07cbEidf0/Receitas10)
 - 🎊 [Features](#features)
-  - 🎇 [Concluídas](#features-concluidas)
+  - 🎇 [Concluídas](#features-concluídas)
   - 🎇 [Pendentes](#features-pendentes)
 - 💡 [Como contribuir](#como-contribuir)
 - 🤗 [Contribuidores](#contribuidores)
@@ -39,33 +40,34 @@
 
 #### 💻 Desktop
 
-Para fins de exemplo usarei o yarn como gerenciador de pacote mas você pode utilizar o seu preferido
-Caso não saiba como instalar, visite [este link](https://imasters.com.br/front-end/ganhando-tempo-rapidez-e-seguranca-com-o-yarn)
-Estes comandos funcionam para qualquer gerenciador de pacotes basta trocar pelo nome do seu, por exemplo trocando por node: ``yarn dev`` se tornaria ``node dev``
+Para fins de exemplo usarei o yarn como gerenciador de pacotes mas você pode utilizar o seu preferido.
+Caso não saiba como instalar, visite [este link](https://imasters.com.br/front-end/ganhando-tempo-rapidez-e-seguranca-com-o-yarn).
+
+Estes comandos funcionam para qualquer gerenciador de pacotes basta trocar pelo nome do seu, por exemplo trocando yarn por node, ``yarn dev`` se tornaria ``node dev``.
 
 Dentro da pasta web, abra o seu terminal e execute:
 
 ```sh
-yarn # para baixar as dependências
-yarn serve # para iniciar o servidor
+yarn  # para baixar as dependências
+yarn serve  # para iniciar o servidor
 ```
 
 Dentro da pasta api, abra seu terminal e execute:
 
 ```sh
-yarn # para baixar as dependências
-yarn migrations # para criar o banco
-yarn seeds # para popular o banco com valores default
-yarn dev # para iniciar a api
+yarn  # para baixar as dependências
+yarn migrations  # para criar o banco
+yarn seeds  # para popular o banco com valores default
+yarn dev  # para iniciar a api
 ```
 
-Crie um arquivo .env caso não exista e dentro dele coloque
+Crie um arquivo `.env` dentro da pasta api e dentro dele coloque:
 ```
 APP_SECRET=&Vr76[Zq
 ```
-Isto é necessário porque os tokens utilizados no seed foram gerados com este app secret e na validação precisam ter os mesmos valores, o de entrada e o que foi utilizado para gerar o token JWT
+Caso não coloque nenhum APP_SECRET não será possível fazer nada que necessite de JWT(Json Web Token). Caso coloque um APP_SECRET diferente do que quando foi gerado o JWT este será inválido e ao fazer login um novo será enviado. Caso queria logar com as contas que estão no seed(precisa desencriptar o hash das senhas para utilizá-las no login), utilize o APP_SECRET acima.
 
-Pronto, basta abrir o seu browser na url http://localhost:8080 para utilizar
+Pronto, basta abrir o seu browser na url http://localhost:8080/login para utilizar.
 
 #### 🌐 Online
 
@@ -77,27 +79,27 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 
 <h2 id="tecnologias">🚀 Tecnologias</h2>
 
-- Node
-- VueJS
-- Css3
-- Html5
-- Bootstrap
-- Axios
-- Babel
-- Typescript
-- Express
-- Sqlite3
-- JWT
-- Knex
-- BcryptJs
-- Prettier
-- Eslint
+- [NodeJs](https://nodejs.org/)
+- [VueJs](https://vuejs.org/)
+- [Css3](https://developer.mozilla.org/pt-BR/docs/Web/CSS/)
+- [Html5](https://developer.mozilla.org/pt-BR/docs/Web/Guide/HTML/HTML5/)
+- [Bootstrap](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [Axios](https://github.com/axios/axios/)
+- [Babel](https://babeljs.io/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Express](https://expressjs.com/)
+- [SQlite3](https://www.sqlite.org/)
+- [JWT](https://jwt.io/)
+- [Knex](http://knexjs.org/)
+- [BcryptJs](https://github.com/dcodeIO/bcrypt.js)
+- [Prettier](https://prettier.io/)
+- [Eslint](https://eslint.org/)
 
 [Back To The Top](#title)
 
 ---
 
-<h2 id="requisitos-minimos">🌱 Requisitos Mínimos</h2>
+<h2 id="requisitos-mínimos">🌱 Requisitos Mínimos</h2>
 
 - NPM/Yarn LTS
 - NodeJs
@@ -108,7 +110,7 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 
 <h2 id="features">🎊 Features</h2>
 
-<h4 id="features-concluidas">🎇 Concluídas</h4>
+<h4 id="features-concluídas">🎇 Concluídas</h4>
 
 - [x] Login / Cadastro
 - [x] Perfil
@@ -128,6 +130,7 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 - [ ] Botão de compartilhar receita
 - [ ] Feed de usuário
 - [ ] Enviar imagem como arquivo e não por url
+- [ ] Layout responsivo
 
 [Back To The Top](#title)
 
@@ -144,10 +147,10 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 - Clique para abrir e preencher as informações da solicitação de pull
 
 <p align = "center">
-<i> Contribuições, solução de problemas e solicitações de recursos são bem-vindos! </i> <br />
+<i> Contribuições, solução de problemas e solicitações de recursos são bem-vindas! </i> <br />
 <i> 📮 Envie PRs para ajudar a resolver problemas ou adicionar recursos </i> <br />
 <i> 🐛 Encontre e relate problemas </i> <br />
-<i> 🌟 Favoritar o projeto </i> <br />
+<i> 🌟 Favorite o projeto </i> <br />
 </p>
 
 [Back To The Top](#title)
@@ -177,7 +180,7 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 - LinkedIn: [@mikael-rolim-522aa21b1](https://linkedin.com/in/mikael-rolim-522aa21b1)
 - Twitter: [@mikaelr16](https://twitter.com/mikaelr16)
 
-🤓 **(FullStack) Renato Reboucas**
+🤓 **(FullStack) Renato Rebouças**
 
 - Github: [@renatoReboucas](https://github.com/renatoReboucas)
 - Instagram: [@renato_reboucas](https://www.instagram.com/renato_reboucas/)
@@ -187,7 +190,7 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 🤓 **(Designer e Frontend) Anthony Davi**
 
 - Github: [@AntDavi](https://github.com/AntDavi)
-- Instagram: [@sou.eu.anthony/](https://www.instagram.com/sou.eu.anthony/)
+- Instagram: [@sou.eu.anthony](https://www.instagram.com/sou.eu.anthony/)
 - LinkedIn: [@antdavi](https://www.linkedin.com/in/antdavi/)
 
 
@@ -203,4 +206,4 @@ Este projeto é licenciado pela [MIT License](https://api.github.com/licenses/mi
 
 ---
 
-_This README was generated with 💟 by [receitas10](https://github.com/Mikael-R/receitas10)_
+_This README was generated with 💟 by [readme-template-generator](https://github.com/Mikael-R/readme-template-generator)_
