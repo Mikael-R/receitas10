@@ -156,7 +156,7 @@ class RecipeController {
       })
 
     const user = await userRepository.findById(req.userId)
-    const recipe = await recipeRepository.findByAuthorIdAndName(authorId, name)
+    const recipe = await recipeRepository.findByAuthorIdAndName(user.id, name)
     if (recipe)
       return res.status(409).json({
         error: true,
