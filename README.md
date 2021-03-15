@@ -1,5 +1,11 @@
 # receitas10-api
 
+# Como utilizar
+
+Execute yarn ou node para baixar as dependencias
+Rode as migrations com yarn migrations ou node migrations
+Rode as seeds para popular o banco com yarn seeds ou npm seeds
+
 ```
 Comment
 {
@@ -45,9 +51,9 @@ Recipe
   ingredients: string[]
   servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
   difficulty: "fácil" | "médio" | "difícil"
-  howToPrepare: string
-  demoImages: string[]
-  additionalInformation: string
+  howPrepare: string
+  demoImages?: string[]
+  additionalInformation?: string
   likes: number
   postedAt: string
 }
@@ -57,7 +63,7 @@ Recipe
 
 ### Buscar receitas(paginação)
 
-* URL: https://domain/search-recipes
+* URL: https://domain/recipes
 
 * Body:
 ```
@@ -315,7 +321,7 @@ Recipe
   ingredients: string[]
   servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
   difficulty: "fácil" | "médio" | "difícil"
-  howToPrepare: string
+  howPrepare: string
   demoImages: string[]
   additionalInformation: string
 }
@@ -325,7 +331,7 @@ Recipe
 ```
 {
   error: false
-  message: 'Receita cadastrada'
+  message: 'Receita criada com sucesso'
   recipe: Recipe
 }
 ```
@@ -334,6 +340,7 @@ Recipe
   * Usuário não encontrado
   * Nome da receita já está em uso por este usuário
   * Parâmetros faltando
+  * Tipo de parâmetros inválido
 
 ### Adicionar comentário em receita(precisa de token)
 
