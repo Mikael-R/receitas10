@@ -1,495 +1,200 @@
-# receitas10-api
+# receitas 10
 
-# Como utilizar
+[![Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Mikael-R/receitas10)
 
-Execute yarn ou node para baixar as dependencias
-Rode as migrations com yarn migrations ou node migrations
-Rode as seeds para popular o banco com yarn seeds ou npm seeds
+[![License](https://img.shields.io/github/license/Mikael-R/receitas10?style=flat-square)](LICENSE.md) [![Last Commit](https://img.shields.io/github/last-commit/Mikael-R/receitas10?style=flat-square)](https://github.com/Mikael-R/receitas10/commits/) ![Language Most Used](https://img.shields.io/github/languages/top/Mikael-R/receitas10?style=flat-square) [![Implementations](https://img.shields.io/badge/%F0%9F%92%A1-implementations-8C8E93.svg?style=flat-square)](https://github.com/Mikael-R/receitas10/issues) ![Repository Size](https://img.shields.io/github/repo-size/Mikael-R/receitas10?style=flat-square)
 
-```
-Comment
-{
-  id: string
-  user: {
-    id: string
-    name: string
-    username: string
-    avatarUrl: string
-  }
-  content: string
-  postedAt: string
-}
+[![Forks](https://img.shields.io/github/forks/Mikael-R/receitas10?style=social)](https://github.com/Mikael-R/receitas10/network/members) [![Stars](https://img.shields.io/github/stars/Mikael-R/receitas10?style=social)](https://github.com/Mikael-R/receitas10/stargazers) [![Watches](https://img.shields.io/github/watchers/Mikael-R/receitas10?style=social)](https://github.com/Mikael-R/receitas10/watchers)
 
-Recipe
-{
-  id: string
-  preparationTime:
-    | "rápido"
-    | "até 1 hora"
-    | "até 2 horas"
-    | "até 4 horas"
-    | "até 6 horas"
-    | "mais de 6 horas"
-  category:
-    | "acompanhamento"
-    | "bebida"
-    | "bolos"
-    | "carnes"
-    | "comidas fitness"
-    | "comidas típicas"
-    | "doces e sobremesas"
-    | "frango"
-    | "lanches"
-    | "massas"
-    | "molhos"
-    | "peixes"
-    | "petiscos"
-    | "pratos principais"
-    | "sopas"
-    | "temperos"
-    | "tortas"
-  ingredients: string[]
-  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
-  difficulty: "fácil" | "médio" | "difícil"
-  howPrepare: string
-  demoImages?: string[]
-  additionalInformation?: string
-  likes: number
-  postedAt: string
-}
+
+<h1 id="title" align="center">Bem vindo ao receitas 10 👋</h1>
+
+<h4 align="center">🚧 receitas 10 em desenvolvimento... 🚧</h4>
+
+> Um site de uma comunidade de receitas cheia de sabores
+
+<details>
+<summary>Screenshots</summary>
+
+<img src=".github/demo1.png" width="240" alt="screenshot0">
+<img src=".github/demo2.png" width="240" alt="screenshot1">
+</details>
+
+### 🔖 Tabela de guia
+
+- 🤔 [Como utilizar](#como-usar)
+- 🚀 [Tecnologias](#tecnologias)
+- 🌱 [Minimal Requirements](#requisitos-minimos)
+- 🎊 [Features](#features)
+  - 🎇 [Concluídas](#features-concluidas)
+  - 🎇 [Pendentes](#features-pendentes)
+- 💡 [Como contribuir](#como-contribuir)
+- 🤗 [Contribuidores](#contribuidores)
+- 👤 [Autores](#autores)
+- 🔏 [Licença](#licensa)
+
+---
+
+<h2 id="como-usar">🤔 Como utilizar</h2>
+
+#### 💻 Desktop
+
+Para fins de exemplo usarei o yarn como gerenciador de pacote mas você pode utilizar o seu preferido
+Caso não saiba como instalar, visite [este link](https://imasters.com.br/front-end/ganhando-tempo-rapidez-e-seguranca-com-o-yarn)
+Estes comandos funcionam para qualquer gerenciador de pacotes basta trocar pelo nome do seu, por exemplo trocando por node: ``yarn dev`` se tornaria ``node dev``
+
+Dentro da pasta web, abra o seu terminal e execute:
+
+```sh
+yarn # para baixar as dependências
+yarn serve # para iniciar o servidor
 ```
 
-## GET
+Dentro da pasta api, abra seu terminal e execute:
 
-### Buscar receitas(paginação)
-
-* URL: https://domain/recipes
-
-* Body:
-```
-{
-  name: string
-  servings?: ("até 2" | "até 4" | "até 6" | "até 10" | "mais de 10")[]
-  difficulty?: ("fácil" | "médio" | "difícil")[]
-  preparationTime?:(
-    | "rápido"
-    | "até 1 hora"
-    | "até 2 horas"
-    | "até 4 horas"
-    | "até 6 horas"
-    | "mais de 6 horas")[]
-  category?:(
-    | "acompanhamento"
-    | "bebida"
-    | "bolos"
-    | "carnes"
-    | "comidas fitness"
-    | "comidas típicas"
-    | "doces e sobremesas"
-    | "frango"
-    | "lanches"
-    | "massas"
-    | "molhos"
-    | "peixes"
-    | "petiscos"
-    | "pratos principais"
-    | "sopas"
-    | "temperos"
-    | "tortas")[]
-  moreLikes?: boolean
-  moreComments?: boolean
-  latest?: boolean
-}
+```sh
+yarn # para baixar as dependências
+yarn migrations # para criar o banco
+yarn seeds # para popular o banco com valores default
+yarn dev # para iniciar a api
 ```
 
-* Retorno:
-```
-{ recipes: Recipe[] }
-```
+Pronto, basta abrir o seu browser na url http://localhost:8080 para utilizar
 
-* Erros:
-  * Nenhum parâmetro de busca informado
+#### 🌐 Online
 
-### Buscar receitas aleatórias(paginação)
-
-* URL: https://domain/search-recipes/random
+Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 
-* Retorno:
-```
-{
-  recipes: Recipe[]
-}
-```
+[Back To The Top](#title)
 
-### Buscar receitas de usuário(paginação)
+---
 
-* URL: https://domain/search-recipes/user/:username
+<h2 id="tecnologias">🚀 Tecnologias</h2>
 
-* Retorno:
-```
-{
-  recipes: Recipe[]
-}
-```
+- Node
+- VueJS
+- Css3
+- Html5
+- Bootstrap
+- Axios
+- Babel
+- Typescript
+- Express
+- Sqlite3
+- JWT
+- Knex
+- BcryptJs
+- Prettier
+- Eslint
 
-* Erros:
-  * Usuário não encontrado
+[Back To The Top](#title)
 
-### Comentários de receita(paginação)
-
-* URL: https://dominio/search-recipes/comments/:recipe-id
-
-* Retorno
-```
-{
-  comments: Comment[]
-}
-```
-
-* Erros:
-  * Receita não encontrada
-
-### Comentários de usuário em receitas(paginação)
-
-* URL: https://dominio/users/comments/:username
-
-* Retorno
-```
-{
-  comments: Comment[]
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-
-### Informações de usuário
-
-* URL: https://domain/users/:username
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Usuário encontrado'
-  user: {
-    id: string
-    name: string
-    username: string
-    avatarUrl: string
-    description: string
-    createAccountAt: string
-    lastSessionAt: string
-  }
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-
-### Feed de usuário(paginação)
-
-* URL: https://domain/users/feed/:username
-
-* Retorno:
-```
-{
-  title: string
-  description: string
-  date: string
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-
-### Receitas curtidas de usuário(paginação)
-
-* URL: https://domain/users/recipes-liked/:username
-
-* Retorno:
-```
-{ recipes: Recipe[] }
-```
-
-* Erros:
-  * Usuário não encontrado
-
-## POST
-
-### Sign-up user
-
-* URL: https://domain/users
-
-* Body:
-```
-{
-  name: string
-  username: string
-  email: string
-  password: string
-}
-```
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Usuário criado com sucesso',
-  user: {
-    id: string
-  }
-}
-```
-
-* Erros:
-  * Parâmetros faltando
-  * Username não pode ser menor que 2 ou maior que 12 caracteres
-  * Este username já existe
-  * Este email já existe
-
-### Sign-in user
-
-* URL: https://domain/sessions
-
-* Body:
-```
-{
-  email: string
-  password: string
-}
-```
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Usuário encontrado'
-  user: {
-    id: string
-    name: string
-    username: string
-    email: string
-    token: string
-    avatarUrl: string
-    description: string
-    createdAt: string
-    lastSessionAt: string
-  }
-}
-```
-
-* Erros:
-  * Parâmetros faltando
-  * Usuário não encontrado
-  * Senha incorreta
-
-### Adicionar receita(precisa de token)
-
-* URL: https://domain/recipes
-
-* Body:
-```
-{
-  userId: string
-  recipeName: string
-  preparationTime:
-    | "rápido"
-    | "até 1 hora"
-    | "até 2 horas"
-    | "até 4 horas"
-    | "até 6 horas"
-    | "mais de 6 horas"
-  category:
-    | "acompanhamento"
-    | "bebida"
-    | "bolos"
-    | "carnes"
-    | "comidas fitness"
-    | "comidas típicas"
-    | "doces e sobremesas"
-    | "frango"
-    | "lanches"
-    | "massas"
-    | "molhos"
-    | "peixes"
-    | "petiscos"
-    | "pratos principais"
-    | "sopas"
-    | "temperos"
-    | "tortas"
-  ingredients: string[]
-  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
-  difficulty: "fácil" | "médio" | "difícil"
-  howPrepare: string
-  demoImages: string[]
-  additionalInformation: string
-}
-```
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Receita criada com sucesso'
-  recipe: Recipe
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-  * Nome da receita já está em uso por este usuário
-  * Parâmetros faltando
-  * Tipo de parâmetros inválido
-
-### Adicionar comentário em receita(precisa de token)
-
-* URL: https://domain/recipes/comments/:recipe-id
-
-* Erros:
-  * Receita não encontrada
-
-## DELETE
-
-### Deletar usuário(precisa de token)
-
-* URL: https://domain/users/delete/:username
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Usuário deletado com sucesso'
-  user: {
-    id: string
-  }
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-
-### Deletar comentário(precisa de token)
-
-* URL: https://domain/users/delete-comment/:username
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Usuário deletado com sucesso'
-  user: {
-    id: string
-  }
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-
-### Deletar receita(precisa de token)
-
-* URL: https://domain/recipes/delete/:recipe-name
-
-* Retorno:
-```
-{
-  error: false
-  message: 'Receita deletada com sucesso'
-  recipe: {
-    id: string
-  }
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-  * Receita não encontrada
-
-## PUT
-
-### Trocar senha(precisa de token)
-
-* URL: https://domain/users/change-password/:username
-
-* Retorno:
-```
-{
-  error: false
-  message: 'A nova senha enviada para o seu email'
-  user: {
-    id: string
-    name: string
-    username: string
-    email: string
-  }
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-
-### Modificar receita(precisa de token)
-
-* URL: https://domain/recipes/:username/:recipe-name
-
-* Body:
-```
-{
-  preparationTime:
-    | "rápido"
-    | "até 1 hora"
-    | "até 2 horas"
-    | "até 4 horas"
-    | "até 6 horas"
-    | "mais de 6 horas"
-  category:
-    | "acompanhamento"
-    | "bebida"
-    | "bolos"
-    | "carnes"
-    | "comidas fitness"
-    | "comidas típicas"
-    | "doces e sobremesas"
-    | "frango"
-    | "lanches"
-    | "massas"
-    | "molhos"
-    | "peixes"
-    | "petiscos"
-    | "pratos principais"
-    | "sopas"
-    | "temperos"
-    | "tortas"
-  ingredients: string[]
-  optionalIngredients: string[]
-  servings: "até 2" | "até 4" | "até 6" | "até 10" | "mais de 10"
-  difficulty: "fácil" | "médio" | "difícil"
-  howToPrepare: string
-  demoImages: string[]
-  additionalInformation: string
-}
-```
-
-* Retorno:
-```
-{
-  erro: false
-  message: 'Receita foi atualizada com sucesso'
-  recipe: {
-    id: string
-  }
-}
-```
-
-* Erros:
-  * Usuário não encontrado
-  * Receita não encontrada
-  * Nenhum parâmetro para update foi informado
-
-### Remover/adicionar curtida em receita(precisa de token)
-
-* URL: https://domain/recipes/like/:recipe-name
-
-* Erros:
-  * Receita não encontrada
+---
+
+<h2 id="requisitos-minimos">🌱 Requisitos Mínimos</h2>
+
+- NPM/Yarn LTS
+- NodeJs
+
+[Back To The Top](#title)
+
+---
+
+<h2 id="features">🎊 Features</h2>
+
+<h4 id="features-concluidas">🎇 Concluídas</h4>
+
+- [x] Login / Cadastro
+- [x] Perfil
+- [x] Home com receitas aleatórias
+- [x] Página de receita
+- [x] Enviar receita
+
+<h4 id="features-pendentes">🎇 Pendentes</h4>
+
+- [ ] Buscar receitas por nome
+- [ ] Recuperar senha
+- [ ] Logout
+- [ ] Atualizar / Deletar receita
+- [ ] Deletar conta
+- [ ] Comentar em receita
+- [ ] Dar like em receita
+- [ ] Botão de compartilhar receita
+- [ ] Feed de usuário
+- [ ] Enviar imagem como arquivo e não por url
+
+[Back To The Top](#title)
+
+---
+
+<h2 id="como-contribuir">💡 Como Contribuir</h2>
+
+- Faça um fork deste repositório
+- Clone para sua máquina e insira na pasta respectiva
+- Crie um branch com seu recurso: `git checkout -b my-feature`
+- Faça commit de suas mudanças: `git commit -m 'feat: My new feature'`
+- Empurre seu branch: `git push origin my-feature`
+- Um botão verde aparecerá no início deste repositório
+- Clique para abrir e preencher as informações da solicitação de pull
+
+<p align = "center">
+<i> Contribuições, solução de problemas e solicitações de recursos são bem-vindos! </i> <br />
+<i> 📮 Envie PRs para ajudar a resolver problemas ou adicionar recursos </i> <br />
+<i> 🐛 Encontre e relate problemas </i> <br />
+<i> 🌟 Favoritar o projeto </i> <br />
+</p>
+
+[Back To The Top](#title)
+
+---
+
+<h2 id="contribuidores">🤗 Contribuidores</h2>
+
+<p>
+
+<a href="https://github.com/Mikael-R"><img width="60" src="https://avatars1.githubusercontent.com/u/60241602?v=4"/>
+<a href="https://github.com/renatoReboucas"><img width="60" src="https://avatars.githubusercontent.com/u/36609074?s=400&u=2f878e296c5522ef1a81db1a9c12b39b7207d762&v=4"/>
+<a href="https://github.com/AntDavi"><img width="60" src="https://avatars.githubusercontent.com/u/69051403?s=400&u=614a6e7d6df36710abfad970be649581d71b0a67&v=4"/>
+
+</p>
+
+[Back To The Top](#title)
+
+---
+
+<h2 id="autores">👤 Autores</h2>
+
+🤓 **(FullStack) Mikael Rolim de Aquino <mikarg9@gmail.com>**
+
+- Github: [@Mikael-R](https://github.com/Mikael-R)
+- Instagram: [@mikaelr404](https://www.instagram.com/mikaelr404/)
+- LinkedIn: [@mikael-rolim-522aa21b1](https://linkedin.com/in/mikael-rolim-522aa21b1)
+- Twitter: [@mikaelr16](https://twitter.com/mikaelr16)
+
+🤓 **(FullStack) Renato Reboucas**
+
+- Github: [@renatoReboucas](https://github.com/renatoReboucas)
+- Instagram: [@renato_reboucas](https://www.instagram.com/renato_reboucas/)
+- LinkedIn: [@renatoReboucas](https://www.linkedin.com/in/renatoReboucas/)
+- Twitter: [@https_zero6](https://twitter.com/https_zero6)
+
+🤓 **(Designer e Frontend) Anthony Davi**
+
+- Github: [@AntDavi](https://github.com/AntDavi)
+- Instagram: [@sou.eu.anthony/](https://www.instagram.com/sou.eu.anthony/)
+- LinkedIn: [@antdavi](https://www.linkedin.com/in/antdavi/)
+
+
+[Back To The Top](#title)
+
+---
+
+<h2 id="licensa">🔏 Licença</h2>
+
+Este projeto é licenciado pela [MIT License](https://api.github.com/licenses/mit).
+
+[Back To The Top](#title)
+
+---
+
+_This README was generated with 💟 by [receitas10](https://github.com/Mikael-R/receitas10)_
