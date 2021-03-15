@@ -59,6 +59,12 @@ yarn seeds # para popular o banco com valores default
 yarn dev # para iniciar a api
 ```
 
+Crie um arquivo .env caso não exista e dentro dele coloque
+```
+APP_SECRET=&Vr76[Zq
+```
+Isto é necessário porque os tokens utilizados no seed foram gerados com este app secret e na validação precisam ter os mesmos valores, o de entrada e o que foi utilizado para gerar o token JWT
+
 Pronto, basta abrir o seu browser na url http://localhost:8080 para utilizar
 
 #### 🌐 Online
