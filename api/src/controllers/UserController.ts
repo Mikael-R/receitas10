@@ -9,25 +9,34 @@ class UserController {
 	async store(req: Request, res: Response) {
 		const { name, username, email, password } = req.body
 		if (!name || !username || !email || !password)
-			return res
-				.status(422)
-				.json({ error: true, message: 'Parâmetros faltando' })
-		if (username.length < 2 || username.length > 12)
+			return res.status(422).json({
+				error: true,
+				title: 'Parâmetros faltando',
+				message: 'Informe nome, username, email e senha'
+			})
+		if (username.length < 2 || username.length > 32)
 			return res.status(403).json({
 				error: true,
-				message: 'Username não pode ser menor que 2 ou maior que 12 caracteres'
+				title: 'Nome de usuário inválido',
+				message:
+					'Nome de usuário deve ser maior que 2 e menor que 32 caracteres'
 			})
 
 		const existsUsername = await userRepository.existsUsername(username)
 		if (existsUsername)
-			return res
-				.status(409)
-				.json({ error: true, message: 'Este username já existe' })
+			return res.status(409).json({
+				error: true,
+				title: 'Conflito',
+				message: 'Este username já existe'
+			})
+
 		const existsEmail = await userRepository.existsEmail(email)
 		if (existsEmail)
-			return res
-				.status(409)
-				.json({ error: true, message: 'Este email já existe' })
+			return res.status(409).json({
+				error: true,
+				title: 'Conflito',
+				message: 'Este email já existe'
+			})
 
 		const userId = uuidv4()
 		const passwordHash = await bcrypt.hash(password, 8)
@@ -92,7 +101,7 @@ class UserController {
 
 		res.json({
 			error: false,
-			message: 'Foram deletados o usuário e todas as suas receitas',
+			message: 'Usuário e todas as suas receitas foram deletadas',
 			user: {
 				id: user.id
 			}

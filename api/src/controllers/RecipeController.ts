@@ -25,6 +25,7 @@ class RecipeController {
 		)
 			return res.status(403).json({
 				error: true,
+				title: 'Parâmetros inválidos',
 				message: 'Parâmetros informados não tem os tipos corretos'
 			})
 
@@ -35,9 +36,11 @@ class RecipeController {
 			!servings.length &&
 			!difficulties.length
 		)
-			return res
-				.status(422)
-				.json({ error: true, message: 'Nenhum parâmetro foi informado' })
+			return res.status(422).json({
+				error: true,
+				title: 'Parâmetros inválidos',
+				message: 'Nenhum parâmetro foi informado'
+			})
 
 		const { count, recipes } = await recipeRepository.search(
 			{
@@ -135,9 +138,12 @@ class RecipeController {
 			!difficulty ||
 			!howPrepare
 		)
-			return res
-				.status(422)
-				.json({ error: true, message: 'Parâmetros faltando' })
+			return res.status(422).json({
+				error: true,
+				title: 'Parâmetros faltando',
+				message:
+					'Informe nome, tempo de preparo, categoria, serve quantas porções, dificuldade e modo de preparo'
+			})
 
 		if (
 			typeof name !== 'string' ||
@@ -152,6 +158,7 @@ class RecipeController {
 		)
 			return res.status(403).json({
 				error: true,
+				title: 'Parâmetros inválidos',
 				message: 'Parâmetros informados não são strings'
 			})
 
@@ -160,7 +167,8 @@ class RecipeController {
 		if (recipe)
 			return res.status(409).json({
 				error: true,
-				message: 'Nome da receita já está em uso por este usuário',
+				title: 'Conflito',
+				message: 'Um usuário não pode ter duas receitas com o mesmo nome',
 				recipe: {
 					id: recipe.id,
 					authorId: user.id
