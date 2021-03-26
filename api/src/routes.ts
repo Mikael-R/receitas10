@@ -1,9 +1,10 @@
 import { Request, Router } from 'express'
 
+import authMiddleware from './middlewares/auth'
+
 import UserController from './controllers/UserController'
 import SessionController from './controllers/SessionController'
 import RecipeController from './controllers/RecipeController'
-import authMiddleware from './middlewares/auth'
 
 const routes = Router()
 
@@ -30,9 +31,9 @@ routes.post('/recipes', authMiddleware, RecipeController.store)
 // routes.put('/recipes', authMiddleware, RecipeController.update)
 routes.delete('/recipes/:recipeName', authMiddleware, RecipeController.destroy)
 
-routes.get('/hello-no-auth', (_, res) => res.json({ message: 'hello no auth' }))
+routes.get('/hello-no-auth', (_, res, next) => next(new Error('Erro teste')))
 routes.get('/hello-with-auth', authMiddleware, (req: Request, res) =>
-  res.json({ message: req.userId })
+	res.json({ message: req.userId })
 )
 
 export default routes
