@@ -1,34 +1,23 @@
 <template>
-  <div class="aling">
-    <!-- <BannerFooter /> -->
-    <img src="../assets/img/comida.png" alt="faixa comida" />
-  </div>
+	<footer>
+		<img src="../assets/img/comida.png" alt="Faixa Comida" />
+	</footer>
 </template>
 
-<script>
-// import BannerFooter from "../assets/img/comida.svg";
-export default {
-  // components: {
-  //   BannerFooter,
-  // },
-};
-</script>
-
 <style scoped>
-  div {
-  background-color: #fcf5e0;
+footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
 }
-.aling{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
-.aling img {
- 
-  width: 100%;
-  position: absolute;
-  margin-top: 6rem;
-  background-color: #fcf5e0;
 
+footer img {
+	width: 100%;
+}
+
+@media (max-width: 640px), (max-height: 640px) {
+	footer {
+		display: none;
+	}
 }
 </style>
