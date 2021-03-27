@@ -1,159 +1,127 @@
 <template>
-  <div>
-    <div class="nav-receitas">
-      <router-link class="home" to="/">
-        <img src="../assets/img/logoNav.png" alt="logo" />
-      </router-link>
-      <div class="wrap">
-        <div class="group-search">
-          <input
-            v-if="desabilitar"
-            class="input-search"
-            type="text"
-            placeholder="Encontre uma receita..."
-            disabled="disabled"
-          />
-          <input
-            v-if="!desabilitar"
-            class="input-search"
-            type="text"
-            placeholder="Encontre uma receita..."
-          />
-          <button v-if="desabilitar" class="btn-search" disabled=" disabled">
-            <img src="../assets/img/search.png" alt="icon-search" />
-          </button>
-          <button v-if="!desabilitar" class="btn-search">
-            <img src="../assets/img/search.png" alt="icon-search" />
-          </button>
-        </div>
-      </div>
-      <div class="enviar">
-        <img
-          src="../assets/img/shopping-list.png"
-          alt="icon-shopping"
-          @click="() => this.$router.replace('/enviar-receita')"
-        />
-        <router-link class="link" to="/enviar-receita"
-          >ENVIE SUA RECEITA</router-link
-        >
-      </div>
-      <router-link
-        class="img"
-        :to="username ? `/perfil/${username}` : '/login'"
-      >
-        <img
-          :src="avatarUrl || require('../assets/img/blanck.png')"
-          alt="foto de perfil"
-        />
-      </router-link>
-    </div>
-  </div>
+	<div class="nav-receitas">
+		<router-link class="home" to="/">
+			<img src="../assets/img/logoNav.png" alt="logo" />
+		</router-link>
+		<div class="search-recipe">
+			<input
+				type="text"
+				placeholder="Encontre uma receita..."
+				:disabled="disableSearch"
+			/>
+			<button :disabled="disableSearch">
+				<img src="../assets/img/search.png" alt="icon-search" />
+			</button>
+		</div>
+		<div class="send-recipe">
+			<img src="../assets/img/shopping-list.png" alt="icon-shopping" />
+			<router-link to="/enviar-receita"> ENVIE SUA RECEITA </router-link>
+		</div>
+		<div class="profile">
+			<router-link :to="username ? `/perfil/${username}` : '/sing-in'">
+				<img
+					:src="avatarUrl || require('../assets/img/blanck.png')"
+					alt="foto de perfil"
+				/>
+			</router-link>
+		</div>
+	</div>
 </template>
 
 <script>
 export default {
-  props: {
-    desabilitar: Boolean,
-  },
-  data() {
-    return {
-      username: "",
-      avatarUrl: "",
-    };
-  },
-  async beforeMount() {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    this.username = user?.username;
-    this.avatarUrl = user?.avatarUrl;
-  },
-};
+	props: {
+		disableSearch: Boolean
+	},
+	data() {
+		return {
+			username: '',
+			avatarUrl: ''
+		}
+	},
+	beforeMount() {
+		const user = JSON.parse(localStorage.getItem('user') || '{}')
+		this.username = user.username
+		this.avatarUrl = user.avatarUrl
+	}
+}
 </script>
 
-<style scooped>
-.home:hover {
-  cursor: pointer;
-}
-.wrap:hover {
-  cursor: pointer;
-}
-.enviar img:hover {
-  cursor: pointer;
-}
-.img:hover {
-  cursor: pointer;
-}
-.img img {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-.enviar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #c62828;
-  font-size: 11px;
-}
-.enviar img {
-  width: 26px;
-  height: 29px;
-}
+<style scoped>
 .nav-receitas {
-  background: #e3d8b4;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  height: 60px;
+	height: 60px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	background: #e3d8b4;
 }
-group-search {
-  position: relative;
+
+.home:hover,
+.search-recipe:hover,
+.send-recipe img:hover,
+.profile img:hover {
+	cursor: pointer;
 }
-.input-search {
-  background: #fcf5e0;
-  border: 1px solid rgba(198, 40, 40, 0.5);
-  box-sizing: border-box;
-  border-bottom-right-radius: 0px;
-  border-top-right-radius: 0px;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-  border-right: none;
-  padding: 7px;
+
+.send-recipe {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	color: #c62828;
+	font-size: 11px;
 }
-.input-search:focus {
-  outline: 0;
+.send-recipe img {
+	width: 26px;
+	height: 29px;
 }
-.btn-search {
-  background: #fcf5e0;
-  position: relative;
-  cursor: pointer;
-  border: 1px solid rgba(198, 40, 40, 0.5);
-  border-bottom-left-radius: 0px;
-  border-top-left-radius: 0px;
-  border-top-left-radius: 0px;
-  border-bottom-right-radius: 8px;
-  border-top-right-radius: 8px;
-  border-left: none;
-  text-align: center;
-  outline: none;
-  transition: 0.3s;
-  padding: 7px;
+.send-recipe a {
+	color: #c62828;
 }
-.input-search:hover .btn-search:hover {
-  border-color: rgba(198, 40, 40, 0.5);
+.send-recipe a:hover {
+	color: #c62828;
 }
-.input-search:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+
+.search-recipe input {
+	background: #fcf5e0;
+	border: 1px solid rgba(198, 40, 40, 0.5);
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+	padding: 7px;
 }
-.btn-search:disabled {
-  background: #ccc;
-  cursor: not-allowed;
+.search-recipe input:disabled {
+	background: #ccc;
+	cursor: not-allowed;
 }
-.link {
-  color: #c62828;
+
+.search-recipe button {
+	background: #fcf5e0;
+	position: relative;
+	border: 1px solid rgba(198, 40, 40, 0.5);
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+	margin-left: -2px;
+	padding: 7px;
 }
-.link:hover {
-  color: #c62828;
+.search-recipe button:disabled {
+	background: #ccc;
+	cursor: not-allowed;
+}
+
+.search-recipe input:hover,
+.search-recipe button:hover {
+	border-color: rgba(198, 40, 40, 0.5);
+}
+
+.profile a img {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+}
+
+@media (max-width: 612px) {
+	.home img {
+		display: none;
+	}
 }
 </style>
