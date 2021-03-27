@@ -1,126 +1,106 @@
-import Vue from "vue";
-import Router from "vue-router";
-import VueAlertify from "vue-alertify";
+import Vue from 'vue'
+import Router from 'vue-router'
 
-import Login from "./pages/Login.vue";
-import Home from "./pages/Home.vue";
-import Cadastro from "./pages/Cadastro.vue";
-// import EsqueceuSenha from "./pages/EsqueceuSenha.vue";
-import Perfil from "./pages/Perfil.vue";
-import EnviarReceita from "./pages/EnviarReceita.vue";
-import Receita from "./pages/VisualizarReceita.vue";
+import SingIn from './pages/SingIn.vue'
+import Home from './pages/Home.vue'
+import SingUp from './pages/SingUp.vue'
+import ForgotPassword from './pages/ForgotPassword.vue'
+import Profile from './pages/Profile.vue'
+import SendRecipe from './pages/SendRecipe.vue'
+import ViewRecipe from './pages/ViewRecipe.vue'
 
-import usersServices from "./services/users";
+import userRepository from './repositories/user'
 
-Vue.use(Router);
-Vue.use(VueAlertify, {
-  autoReset: true,
-  basic: false,
-  closable: true,
-  closableByDimmer: true,
-  frameless: false,
-  maintainFocus: true,
-  maximizable: true,
-  modal: true,
-  movable: true,
-  moveBounded: false,
-  overflow: true,
-  padding: true,
-  pinnable: true,
-  pinned: true,
-  preventBodyShift: false,
-  resizable: true,
-  startMaximized: false,
-  transition: "pulse",
-  notifier: {
-    delay: 5,
-    position: "top-right",
-    closeButton: true,
-  },
-  glossary: {
-    title: "AlertifyJS",
-    ok: "OK",
-    cancel: "Cancel",
-  },
-  theme: {
-    input: "ajs-input",
-    ok: "ajs-ok",
-    cancel: "ajs-cancel",
-  },
-});
+Vue.use(Router)
 
 const router = new Router({
-  mode: "history",
-  routes: [
-    {
-      name: "login",
-      path: "/login",
-      component: Login,
-    },
-    {
-      name: "home",
-      path: "/",
-      component: Home,
-    },
-    {
-      name: "cadastro",
-      path: "/cadastro",
-      component: Cadastro,
-    },
-    // {
-    //   name: "esqueceu-senha",
-    //   path: "/esqueceu-senha",
-    //   component: EsqueceuSenha,
-    // },
-    {
-      name: "enviar-receita",
-      path: "/enviar-receita",
-      component: EnviarReceita,
-      meta: {
-        requiresAuth: true,
-      },
-    },
-    {
-      name: "perfil",
-      path: "/perfil/:username",
-      component: Perfil,
-    },
-    {
-      name: "receita",
-      path: "/receita/:username/:recipeName",
-      component: Receita,
-    },
-  ],
-});
+	mode: 'history',
+	routes: [
+		{
+			name: 'Sing-In',
+			path: '/sing-in',
+			alias: ['/login', '/entrar'],
+			component: SingIn
+		},
+		{
+			name: 'Home',
+			path: '/',
+			alias: ['/home', '/pagina-inicial', '/inicio'],
+			component: Home
+		},
+		{
+			name: 'Sing-Up',
+			path: '/sing-up',
+			alias: ['/registro', '/cadastro', '/criar-conta'],
+			component: SingUp
+		},
+		{
+			name: 'Forgot Password',
+			path: '/forgot-password',
+			alias: ['/esqueci-senha', '/recuperar-senha'],
+			component: ForgotPassword
+		},
+		{
+			name: 'Send Recipe',
+			path: '/send-recipe',
+			alias: ['/new-recipe', '/enviar-receita', '/nova-receita'],
+			component: SendRecipe,
+			meta: {
+				requiresAuth: true
+			}
+		},
+		{
+			name: 'Profile',
+			path: '/profile/:username',
+			alias: ['/perfil/:username'],
+			component: Profile
+		},
+		{
+			name: 'View Recipe',
+			path: '/recipe/:username/:recipeName',
+			alias: ['/receita/:username/:recipeName'],
+			component: ViewRecipe
+		}
+	]
+})
 
 router.beforeEach(async (to, from, next) => {
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  if (to.meta.requiresAuth) {
-    try {
-      const { data } = await usersServices.isValid({
-        id: user?.id,
-        name: user?.name,
-        username: user?.username,
-        email: user?.email,
-        token: user?.token,
-      });
-      if (data.user.isValid) {
-        next();
-      } else {
-        next({
-          path: "/login",
-          params: { nextUrl: to.fullPath },
-        });
-      }
-    } catch (error) {
-      next({
-        path: "/login",
-        params: { nextUrl: to.fullPath },
-      });
-    }
-  } else {
-    next();
-  }
-});
+	let user
+	try {
+		user = JSON.parse(localStorage.getItem('user'))
+	} catch {
+		user = null
+	}
 
-export default router;
+	const goToLogin = () =>
+		next({
+			path: '/login',
+			params: { nextUrl: to.fullPath }
+		})
+
+	if (to.meta.requiresAuth) {
+		if (user === null) goToLogin()
+		else {
+			try {
+				const { isValid } = (
+					await userRepository.isValid({
+						id: user.id,
+						name: user.name,
+						username: user.username,
+						email: user.email,
+						token: user.token
+					})
+				).data.user
+
+				if (isValid) next()
+				else goToLogin()
+			} catch {
+				goToLogin()
+			}
+		}
+	} else {
+		next()
+	}
+})
+
+export default router
