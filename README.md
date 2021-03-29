@@ -177,7 +177,7 @@ Por enquanto não temos um domínio mas não tema pois esse dia chegará!
 
 - Github: [@Mikael-R](https://github.com/Mikael-R)
 - Instagram: [@mikaelr404](https://www.instagram.com/mikaelr404/)
-- LinkedIn: [@mikael-rolim-522aa21b1](https://linkedin.com/in/mikael-rolim-522aa21b1)
+- LinkedIn: [@mikael-rolim-522aa21b1](https://linkedin.com/in/mikael-r)
 - Twitter: [@mikaelr16](https://twitter.com/mikaelr16)
 
 🤓 **(FullStack) Renato Rebouças**
