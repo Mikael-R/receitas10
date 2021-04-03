@@ -20,9 +20,12 @@
 					required
 				/>
 				<button class="button-sing-in" type="submit">Entrar</button>
-				<router-link class="forgot-password" to="/forgot-password"
-					>Esqueceu sua senha?</router-link
-				>
+				<div class="sing-in-actions">
+					<b-form-checkbox v-model="remember"> Lembrar-me </b-form-checkbox>
+					<router-link class="forgot-password" to="/forgot-password"
+						>Esqueceu sua senha?</router-link
+					>
+				</div>
 				<hr class="hr" />
 				<button
 					class="button-sing-up"
@@ -47,7 +50,8 @@ export default {
 	data() {
 		return {
 			email: '',
-			password: ''
+			password: '',
+			remember: true
 		}
 	},
 	methods: {
@@ -60,6 +64,7 @@ export default {
 				console.log(user)
 
 				localStorage.setItem('user', JSON.stringify(user))
+				localStorage.setItem('remember', this.remember)
 
 				this.$router.push('/')
 			} catch {}
@@ -69,11 +74,6 @@ export default {
 </script>
 
 <style scoped>
-hr {
-	border: 1px solid rgba(0, 0, 0, 0.3);
-	transform: rotate(0.15deg);
-	margin: 0 25px;
-}
 .logo {
 	text-align: center;
 	margin-bottom: 45px;
@@ -82,6 +82,7 @@ hr {
 	width: 480px;
 	height: 360;
 }
+
 .card {
 	width: 512px;
 	height: 360px;
@@ -90,6 +91,7 @@ hr {
 	background: #e3d8b4;
 	margin: auto;
 }
+
 .input {
 	width: 95%;
 	margin: auto;
@@ -99,27 +101,7 @@ hr {
 	font-size: 20px;
 	line-height: 23px;
 }
-.button-sing-up {
-	width: 45%;
-	min-width: 140px;
-	height: 55px;
-	background: #f5cb4c;
-	border: 1px solid rgba(0, 0, 0, 0.3);
-	border-radius: 8px;
-	color: #fff8ea;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 22px;
-	margin: auto;
-}
-.button-sing-up:hover,
-.button-sing-up:focus {
-	border: 1px solid #fcad26;
-}
-.forgot-password {
-	color: #597f93;
-	margin: auto;
-}
+
 .button-sing-in {
 	width: 95%;
 	height: 55px;
@@ -138,6 +120,39 @@ hr {
 	border: 1px solid #9cd0ec;
 }
 
+.sing-in-actions {
+	display: flex;
+	padding: 15px 20px;
+	justify-content: space-between;
+}
+.sing-in-actions .forgot-password {
+	color: #597f93;
+}
+
+.hr {
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	transform: rotate(0.15deg);
+	margin: 0 15px;
+}
+
+.button-sing-up {
+	width: 45%;
+	min-width: 140px;
+	height: 55px;
+	background: #f5cb4c;
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	border-radius: 8px;
+	color: #fff8ea;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 22px;
+	margin: auto;
+}
+.button-sing-up:hover,
+.button-sing-up:focus {
+	border: 1px solid #fcad26;
+}
+
 @media (max-width: 640px) {
 	.logo img {
 		width: 340px;
@@ -147,6 +162,11 @@ hr {
 @media (max-width: 516px) {
 	.card {
 		border-radius: 0px;
+	}
+
+	.sing-in-actions {
+		display: inline;
+		padding: auto;
 	}
 }
 
